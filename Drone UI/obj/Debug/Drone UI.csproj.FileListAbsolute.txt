@@ -1,0 +1,15 @@
+c:\users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\bin\Debug\Drone UI.exe.config
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\bin\Debug\Drone UI.exe
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\bin\Debug\Drone UI.pdb
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Drone UI.csprojResolveAssemblyReference.cache
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Simple Styles.baml
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\App.g.cs
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Drone UI_MarkupCompile.cache
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Drone UI_MarkupCompile.lref
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Drone UI.g.resources
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Drone_UI.Properties.Resources.resources
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Drone UI.csproj.GenerateResource.Cache
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Drone UI.exe
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\Drone UI.pdb
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\MainWindow.g.cs
+C:\Users\hpalmer\documents\visual studio 2015\Projects\Drone UI\Drone UI\obj\Debug\MainWindow.baml
