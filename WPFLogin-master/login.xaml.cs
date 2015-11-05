@@ -48,7 +48,7 @@ namespace WpfApp1
             txtBxuserName.IsEnabled = false;
             passBxPassword.IsEnabled = false;
             btnLogin.IsEnabled = false;
-            if (userName == "dhaval" && pass == "123@qaz")
+            if (userName == "admin" && pass == "admin")
             {
                 if (bw.IsBusy == false)
                 {
@@ -104,33 +104,43 @@ namespace WpfApp1
             
         }
 
+        //exit button closes window
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
         }
 
+        //Lets the window be dragged
         private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
 
+        //returns border to white if text has changed after incorrectly entering username
         private void txtBxuserName_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtBxuserName.BorderBrush = Brushes.White;            
         }
 
+        //returns border to white if text has changed after incorrectly entering password
         private void passBxPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             passBxPassword.BorderBrush = Brushes.White;
         }
 
+        //If enter is pressed moves to password field
+        private void txtBxuserName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.Enter))
+                txtBxuserName.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+        }
+
+        //If enter is pressed moves to button
         private void passBxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Enter))
-            {
-
-            }
+                btnLogin.Focus();
         }
     }
 }
