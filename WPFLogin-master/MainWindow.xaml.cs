@@ -1,11 +1,7 @@
-﻿//Harrison Palmer
-//cs203-L
-//Drone_UI
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Drone_UI
+namespace WpfApp1
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,16 +24,6 @@ namespace Drone_UI
             InitializeComponent();
         }
 
-        private void Home_Click(object sender, RoutedEventArgs e)
-        {
-            Home.IsEnabled = true;
-        }
-
-        //mouse hover - home
-        private void Home_MouseEnter(object sender, MouseEventArgs e)
-        {
-            
-        }
         private void btnClickMe_Click(object sender, RoutedEventArgs e)
         {
             //lblHelloWorld.Content = "Hello World";
@@ -50,6 +36,5 @@ namespace Drone_UI
                 lblHelloWorld.Content = "ON";
             }
         }
-
     }
 }
