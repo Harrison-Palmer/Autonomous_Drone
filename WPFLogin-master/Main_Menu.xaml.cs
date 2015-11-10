@@ -15,26 +15,25 @@ using System.Windows.Shapes;
 namespace WpfApp1
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Main_Menu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Main_Menu : Window
     {
-        public MainWindow()
+        public Main_Menu()
         {
             InitializeComponent();
         }
 
-        private void btnClickMe_Click(object sender, RoutedEventArgs e)
+        private void Home_Click(object sender, RoutedEventArgs e)
         {
-            //lblHelloWorld.Content = "Hello World";
-            if (lblHelloWorld.Content == "ON")
-            {
-                lblHelloWorld.Content = "OFF";
-            }
-            else
-            {
-                lblHelloWorld.Content = "ON";
-            }
+            Application.Current.MainWindow = new test();
+            //NavigationService.Navigate(new Uri("test.xaml", UriKind.Relative));
+        }
+
+        //mouse hover - home
+        private void Home_MouseEnter(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

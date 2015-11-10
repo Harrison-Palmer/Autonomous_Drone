@@ -52,7 +52,9 @@ namespace WpfApp1
             {
                 if (bw.IsBusy == false)
                 {
-                    bw.RunWorkerAsync();                
+                    bw.RunWorkerAsync();
+                    var newW = new Main_Menu();
+                    newW.Show();
                 }                
             }
             else
