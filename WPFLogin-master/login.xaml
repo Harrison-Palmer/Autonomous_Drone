@@ -12,17 +12,20 @@
         MouseDown="Window_MouseDown_1" 
         WindowStartupLocation="CenterScreen">
     <Grid Height="171" Width="359">
-        <Image Source="/WpfApp1;component/Images/bImage.png" Stretch="UniformToFill" />
-        <Label HorizontalAlignment="Left" Margin="10,32,0,39" Name="label1" Width="100" FontFamily="FontAwesome" Content="" FontSize="100" FontStretch="Condensed" />
-        <Label Content="User Name" Margin="106,50,0,0" x:Name="Username_Label" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="79" Foreground="White" Grid.Row="1" Grid.Column="1" FontFamily="Verdana" />
-        <TextBox Margin="183,0,0,90" Name="txtBxuserName" Height="30" VerticalContentAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="157" FontFamily="FontAwesome" Background="#00000000" OpacityMask="White" BorderBrush="White" Foreground="White" TextChanged="txtBxuserName_TextChanged" Grid.Row="1" Grid.Column="1" KeyDown="txtBxuserName_KeyDown"/>
-        <Label Content="Password" x:Name="Password_Label" Margin="106,85,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="79" Foreground="White" Grid.Row="1" Grid.Column="1" FontFamily="Verdana" />
-        <PasswordBox Margin="183,0,0,55" Name="passBxPassword" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="157" FontFamily="FontAwesome" BorderBrush="White" Background="#00000000" PasswordChar="*" OverridesDefaultStyle="False" SelectionBrush="#FFFFB14A" Height="30" VerticalAlignment="Bottom" Foreground="White" PasswordChanged="passBxPassword_PasswordChanged" Grid.Row="1" Grid.Column="1" KeyDown="passBxPassword_KeyDown" />
-        <Label Content="Forgot Password ?" Margin="106,124,0,0" Name="lblfrgtPass" Foreground="White" FontStretch="Normal" FontFamily="FontAwesome" FontStyle="Normal" FontWeight="Normal" Visibility="Hidden" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="126" Grid.Row="1" Grid.Column="1" />
-        <Button Content="Login" Margin="265,121,0,0" Name="btnLogin" Click="btnLogin_Click" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Cursor="Hand" FontFamily="FontAwesome" Background="#00000000" Foreground="White" BorderBrush="White" Grid.Row="1" Grid.Column="1" />
-        <Label Content="Loading ..." Margin="22,121,0,0" Name="lblLoading" Visibility="Hidden" HorizontalAlignment="Left" Width="77" Height="31" VerticalAlignment="Top" FontFamily="FontAwesome" Grid.Row="1" Grid.Column="1" />
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="385,13,0,0" Name="button1" VerticalAlignment="Top" Width="13" Grid.Row="1" Grid.Column="1" />
-        <Button Content="X" Height="22" HorizontalAlignment="Left" Name="btnClose" VerticalAlignment="Top" Width="22" Background="#00000000" BorderBrush="#00000000" Click="btnClose_Click" BorderThickness="0" Cursor="Arrow" ForceCursor="False" ToolTip="Close" Margin="336,0,0,0" Foreground="White" Grid.RowSpan="2" Grid.Column="1" />
-        <Label Content="Drone Control" Grid.Column="1" Grid.Row="1" Height="28" HorizontalAlignment="Center" x:Name="Name_Label" VerticalAlignment="Top" FontFamily="Verdana" FontSize="15" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" Foreground="White" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="341*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="/WpfApp1;component/Images/bImage.png" Stretch="UniformToFill" Grid.ColumnSpan="2" />
+        <Label HorizontalAlignment="Left" Margin="-8.4,32,0,39" Name="label1" Width="100" FontFamily="FontAwesome" Content="" FontSize="16" FontStretch="Condensed" Grid.Column="1" />
+        <Label Content="User Name" Margin="87.6,50,0,0" x:Name="Username_Label" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="79" Foreground="White" Grid.Column="1" FontFamily="Verdana" d:LayoutOverrides="HorizontalAlignment" />
+        <TextBox Margin="164.6,0,0,90" Name="txtBxuserName" Height="30" VerticalContentAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="157" FontFamily="FontAwesome" Background="#00000000" OpacityMask="White" BorderBrush="White" Foreground="White" TextChanged="txtBxuserName_TextChanged" Grid.Column="1" KeyDown="txtBxuserName_KeyDown"/>
+        <Label Content="Password" x:Name="Password_Label" Margin="87.6,85,0,0" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="79" Foreground="White" Grid.Column="1" FontFamily="Verdana" d:LayoutOverrides="HorizontalAlignment" />
+        <PasswordBox Margin="164.6,0,0,55" Name="passBxPassword" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="157" FontFamily="FontAwesome" BorderBrush="White" Background="#00000000" PasswordChar="*" OverridesDefaultStyle="False" SelectionBrush="#FFFFB14A" Height="30" VerticalAlignment="Bottom" Foreground="White" PasswordChanged="passBxPassword_PasswordChanged" Grid.Column="1" KeyDown="passBxPassword_KeyDown" />
+        <Label Content="Forgot Password ?" Margin="87.6,124,0,0" Name="lblfrgtPass" Foreground="White" FontStretch="Normal" FontFamily="FontAwesome" FontStyle="Normal" FontWeight="Normal" Visibility="Hidden" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="126" Grid.Column="1" />
+        <Button Content="Login" Margin="246.6,121,0,0" Name="btnLogin" Click="btnLogin_Click" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Cursor="Hand" FontFamily="FontAwesome" Background="#00000000" Foreground="White" BorderBrush="White" Grid.Column="1" />
+        <Label Content="Loading ..." Margin="3.6,121,0,0" Name="lblLoading" Visibility="Hidden" HorizontalAlignment="Left" Width="77" Height="31" VerticalAlignment="Top" FontFamily="FontAwesome" Grid.Column="1" />
+        <Button Content="X" Height="22" HorizontalAlignment="Left" Name="btnClose" VerticalAlignment="Top" Width="22" Background="#00000000" BorderBrush="#00000000" Click="btnClose_Click" BorderThickness="0" Cursor="Arrow" ForceCursor="False" ToolTip="Close" Margin="317.6,0,0,0" Foreground="White" Grid.Column="1" />
+        <Label Content="Drone Control" Grid.Column="1" Height="28" HorizontalAlignment="Center" x:Name="Name_Label" VerticalAlignment="Top" FontFamily="Verdana" FontSize="15" HorizontalContentAlignment="Center" FlowDirection="RightToLeft" Foreground="White" Margin="103.418,0,121.818,0" />
     </Grid>
 </Window>
