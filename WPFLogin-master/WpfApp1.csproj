@@ -129,6 +129,9 @@
   <ItemGroup>
     <Resource Include="Images\user-1-glyph-icon_MkuBPp8O.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="flower.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
