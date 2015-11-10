@@ -47,7 +47,7 @@ namespace WpfApp1
             Mouse.OverrideCursor = Cursors.Wait;
             txtBxuserName.IsEnabled = false;
             passBxPassword.IsEnabled = false;
-            btnLogin.IsEnabled = false;
+            btnLogin.IsEnabled = false; 
             if (userName == "admin" && pass == "admin")
             {
                 if (bw.IsBusy == false)
