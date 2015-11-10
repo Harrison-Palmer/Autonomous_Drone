@@ -53,8 +53,6 @@ namespace WpfApp1
                 if (bw.IsBusy == false)
                 {
                     bw.RunWorkerAsync();
-                    var newW = new Main_Menu();
-                    newW.Show();
                 }                
             }
             else
@@ -73,7 +71,7 @@ namespace WpfApp1
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            Thread.Sleep(5000);
+            //Thread.Sleep(2000);
         }
 
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -98,6 +96,10 @@ namespace WpfApp1
                 txtBxuserName.IsEnabled = true;
                 passBxPassword.IsEnabled = true;
                 btnLogin.IsEnabled = true;
+                var newW = new Main_Menu();
+                newW.Show();
+
+                this.Close();
             }
         }
 

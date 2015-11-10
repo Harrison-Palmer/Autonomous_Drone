@@ -26,7 +26,6 @@ namespace WpfApp1
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            //Application.Current.MainWindow = new test();
             //NavigationService.Navigate(new Uri("test.xaml", UriKind.Relative));
         }
 
