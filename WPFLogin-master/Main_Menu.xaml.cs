@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -31,6 +32,22 @@ namespace WpfApp1
 
         //mouse hover - home
         private void Home_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            var newW = new login();
+            newW.Show();
+
+            this.Close();
+        }
+        private void No_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Yes_click(object sender, RoutedEventArgs e)
         {
 
         }
