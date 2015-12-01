@@ -77,6 +77,8 @@
                 <ImageBrush ImageSource="user-1-glyph-icon_MkuBPp8O.png" Stretch="Uniform"/>
             </Rectangle.Fill>
         </Rectangle>
+        <Button x:Name="Start_Button" Content="Start Drone" HorizontalAlignment="Left" Height="99.623" Margin="-1427.502,207.183,0,-285.079" VerticalAlignment="Top" Width="170.221" FontSize="24" FontFamily="Verdana" Background="#FF5BB205" RenderTransformOrigin="0.528,-0.293"/>
+        <Button x:Name="Stop_Button" Content="Stop Drone" HorizontalAlignment="Left" Height="113.623" Margin="-1427.502,311.806,0,-403.702" VerticalAlignment="Top" Width="170.221" Background="Red" FontFamily="Verdana" FontSize="24" RenderTransformOrigin="0.52,0.526"/>
 
         <!--popup for logging out-->
         <!--
