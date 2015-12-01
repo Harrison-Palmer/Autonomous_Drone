@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//using System.Windows.Forms;
 
 namespace WpfApp1
 {
@@ -20,6 +21,11 @@ namespace WpfApp1
     /// </summary>
     public partial class Main_Menu : Window
     {
+
+        bool isSearching = false;
+
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+
         public Main_Menu()
         {
             InitializeComponent();
@@ -33,7 +39,7 @@ namespace WpfApp1
         //mouse hover - home
         private void Home_MouseEnter(object sender, MouseEventArgs e)
         {
-
+            this.Cursor = Cursors.Hand;
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -50,6 +56,30 @@ namespace WpfApp1
         private void Yes_click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        //TODO - make it not crash
+        private void label3_Initialized(object sender, EventArgs e)
+        {
+         // this.Welcome_text.Content = this.monthCalendar1.SelectionRange.Start.ToShortDateString();
+        }
+        //
+        private void Start_Search_Click(object sender, RoutedEventArgs e)
+        {
+            if (isSearching)
+            {
+                Continue_Searching.Visibility = Visibility.Visible;
+                Start_Search.Content = "New Search";
+                search_for_image.Fill = new ImageBrush
+                {
+                    ImageSource = new Image("C:\\Users\\hpalmer.LRC\\Documents\\Harrison & Jared & Ryan\\user-1-glyph-icon_MkuBPp8O.png")
+                };
+            }
+            else
+            {
+                isSearching = true;
+
+            }
         }
     }
 }
