@@ -22,6 +22,8 @@ namespace WpfApp1
     /// Interaction logic for Main_Menu.xaml
     /// </summary>
     /// 
+
+
     public partial class Main_Menu : Window
     {
 
@@ -33,8 +35,6 @@ namespace WpfApp1
         public Main_Menu()
         {
                 InitializeComponent();
-
-                //found_image = "";
         }      
 
     private void Home_Click(object sender, RoutedEventArgs e)
@@ -73,7 +73,6 @@ namespace WpfApp1
         private void Start_Search_Click(object sender, RoutedEventArgs e)
         {
             FTPImageTransfer transfer = null;
-
             if (!isSearching)
             {
                 //shows continue searching button
@@ -112,7 +111,7 @@ namespace WpfApp1
         private void Stop_Button1_Click(object sender, RoutedEventArgs e)
         {
             isSearching = false;
-            //ImageUri = "user-1-glyph-icon_MkuBPp8O.png";
+            //TODO reset images
             
         }
 
@@ -120,13 +119,26 @@ namespace WpfApp1
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
-            comms.SendStart();
-
+            try
+            {
+                comms.SendStart();
+            }
+           catch
+            {
+               
+            }
         }
 
         private void Stop_Button_Click(object sender, RoutedEventArgs e)
         {
-            comms.SendStop();
+            try
+            {
+                comms.SendStop();
+            }
+            catch
+            {
+
+            }
         }
 
         private void KillSwitch_Click(object sender, RoutedEventArgs e)
