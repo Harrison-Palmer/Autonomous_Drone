@@ -114,8 +114,8 @@
                 <ImageBrush ImageSource="flower.jpg" Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="Start_Button" Content="Start Drone" HorizontalAlignment="Left" Height="99.623" Margin="-1427.502,207.183,0,-285.079" VerticalAlignment="Top" Width="170.221" FontSize="24" FontFamily="Verdana" Background="#FF5BB205" RenderTransformOrigin="0.528,-0.293"/>
-        <Button x:Name="Stop_Button" Content="Stop Drone" HorizontalAlignment="Left" Height="113.623" Margin="-1427.502,311.806,0,-403.702" VerticalAlignment="Top" Width="170.221" Background="Red" FontFamily="Verdana" FontSize="24" RenderTransformOrigin="0.52,0.526"/>
+        <Button x:Name="Start_Button" Content="Start Drone" HorizontalAlignment="Left" Height="113.623" Margin="-1058.736,544.48,0,-636.376" VerticalAlignment="Top" Width="170.221" FontSize="24" FontFamily="Verdana" Background="#FF5BB205" RenderTransformOrigin="0.528,-0.293"/>
+        <Button x:Name="Stop_Button" Content="Stop Drone" HorizontalAlignment="Left" Height="113.623" Margin="-858.971,544.48,0,-636.376" VerticalAlignment="Top" Width="170.221" Background="Red" FontFamily="Verdana" FontSize="24" RenderTransformOrigin="0.52,0.526"/>
 
         <!--popup for logging out-->
         <!--
@@ -135,33 +135,12 @@
             </Popup>
         </Grid>
         -->
-
-        <Grid Margin="-1021.868,0,0,-543.95" Height="405.131" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="497.708" d:LayoutOverrides="HorizontalAlignment">
-            <Rectangle Margin="10,21.66,0,52.195" Stroke="Black" HorizontalAlignment="Left" Width="422.431" Fill="#FF1D1C1C" RenderTransformOrigin="0.5,0.5"/>
-            <Label x:Name="label" Content="Person being looked for:" Height="36.72" Margin="10,23.622,3,10" VerticalAlignment="Top" FontFamily="Verdana" FontSize="16" HorizontalAlignment="Left" Width="209.405" Background="{x:Null}" Foreground="White" BorderThickness="0,0,1,1" BorderBrush="#FF979292"/>
-            <Rectangle  HorizontalAlignment="Left" Margin="10,60.342,0,137.503" Stroke="Black" Width="209.405" StrokeThickness="2">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="user-1-glyph-icon_MkuBPp8O.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Label x:Name="label1" Content="
-                   
-                   found:" Height="27.788" Margin="318.578,0,69.757,363.973" VerticalAlignment="Bottom" FontFamily="Verdana" FontSize="16"/>
-            <Rectangle Margin="219.405,60.342,0,137.503" Stroke="Black" HorizontalAlignment="Left" Width="213.026" StrokeThickness="2">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="user-1-glyph-icon_MkuBPp8O.png" Stretch="UniformToFill"/>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Button x:Name="button" Content="Confirm" HorizontalAlignment="Left" Height="42.376" Margin="48.352,0,0,79.746" VerticalAlignment="Bottom" Width="83.176" FontFamily="Verdana" FontSize="16" Background="#FF7FF93A"/>
-            <Button x:Name="button_Copy" Content="   Keep &#xD;&#xA;Searching" HorizontalAlignment="Left" Height="42.376" Margin="136.528,0,0,79.746" VerticalAlignment="Bottom" Width="83.176" FontFamily="Verdana" FontSize="13.333" Background="#FFF34D4D" d:LayoutOverrides="HorizontalAlignment"/>
-
-        </Grid>
         <Label x:Name="label2" Content="" HorizontalAlignment="Left" Margin="-277.498,3.594,0,0" d:LayoutOverrides="Height"/>
         <Label x:Name="Welcome_text" Content="Welcome, Today is " HorizontalAlignment="Left" Margin="-347.141,0,0,-4.233" d:LayoutOverrides="Height" Width="166.344" Initialized="label3_Initialized"/>
         <Rectangle Fill="#FF1D1C1C" HorizontalAlignment="Right" Height="240.437" Margin="-347.141,0,7.141,-589.111" Stroke="Black" VerticalAlignment="Bottom" Width="340"/>
         <Rectangle x:Name="search_for_image" Height="170" Margin="-347.141,0,177.141,-518.674" Stroke="Black" VerticalAlignment="Bottom">
             <Rectangle.Fill>
-                <ImageBrush ImageSource="{Binding ImageUri}"/>
+                <ImageBrush ImageSource="user-1-glyph-icon_MkuBPp8O.png"/>
             </Rectangle.Fill>
         </Rectangle>
         <Rectangle x:Name="Person_found" HorizontalAlignment="Left" Height="170" Margin="-177.141,0,0,-518.674" Stroke="Black" VerticalAlignment="Bottom" Width="170">

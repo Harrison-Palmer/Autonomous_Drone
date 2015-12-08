@@ -32,25 +32,35 @@ namespace WpfApp1
 
         public Main_Menu()
         {
-            InitializeComponent();
-            DataContext = this;
-            ImageUri = "user-1-glyph-icon_MkuBPp8O.png";
-            //found_image = "";
-        }
+            try
+            {
+                InitializeComponent();
 
-        //----Imageuri-start-----\\
-        public static readonly DependencyProperty ImageUriProperty =
-        DependencyProperty.Register("ImageUri", typeof(string), typeof(Main_Menu));
+                //DataContext = this;
+                //ImageUri = "user-1-glyph-icon_MkuBPp8O.png";
+                //found_image = "";
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
 
-        public string ImageUri
-        {
-            get { return (string)GetValue(ImageUriProperty); }
-            set { SetValue(ImageUriProperty, value); }
-        }
-        //----Imageuri-end-----\\
+        }       
 
+    /**
+    //----Imageuri-start-----\\
+    public static readonly DependencyProperty ImageUriProperty =
+    DependencyProperty.Register("ImageUri", typeof(string), typeof(Main_Menu));
 
-        private void Home_Click(object sender, RoutedEventArgs e)
+    public string ImageUri
+    {
+        get { return (string)GetValue(ImageUriProperty); }
+        set { SetValue(ImageUriProperty, value); }
+    }
+    //----Imageuri-end-----\\
+    */
+
+    private void Home_Click(object sender, RoutedEventArgs e)
         {
             //NavigationService.Navigate(new Uri("test.xaml", UriKind.Relative));
         }
@@ -85,6 +95,8 @@ namespace WpfApp1
         //
         private void Start_Search_Click(object sender, RoutedEventArgs e)
         {
+            FTPImageTransfer transfer = null;
+
             if (!isSearching)
             {
                 //shows continue searching button
@@ -107,11 +119,10 @@ namespace WpfApp1
                 if (openFileDialog.ShowDialog() == true)
                    // txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
 
-                ImageUri = openFileDialog.FileName;
+                 transfer = new FTPImageTransfer("192.168.168.1", "drone", "NEVERAGAIN");
 
-                FTPImageTransfer transfer = new FTPImageTransfer("192.168.168.1", "drone", "NEVERAGAIN");
-
-                //transfer.Upload_2("", name + DateTime.Now);
+                //uploads image with name of ui_Image and the date
+                transfer.Upload_2(openFileDialog.FileName, "UI_Image" + DateTime.Now);
             }
             else
             {
@@ -123,7 +134,7 @@ namespace WpfApp1
         private void Stop_Button1_Click(object sender, RoutedEventArgs e)
         {
             isSearching = false;
-            ImageUri = "user-1-glyph-icon_MkuBPp8O.png";
+            //ImageUri = "user-1-glyph-icon_MkuBPp8O.png";
             
         }
     }
