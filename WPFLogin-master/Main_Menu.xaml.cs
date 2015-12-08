@@ -28,37 +28,14 @@ namespace WpfApp1
         bool isSearching = false;
         //String dir_path = @"%USERPROFILE%\\My Documents\\Downloads";
 
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        //private System.Windows.Forms.MonthCalendar monthCalendar1;
 
         public Main_Menu()
         {
-            try
-            {
                 InitializeComponent();
 
-                //DataContext = this;
-                //ImageUri = "user-1-glyph-icon_MkuBPp8O.png";
                 //found_image = "";
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-            }
-
-        }       
-
-    /**
-    //----Imageuri-start-----\\
-    public static readonly DependencyProperty ImageUriProperty =
-    DependencyProperty.Register("ImageUri", typeof(string), typeof(Main_Menu));
-
-    public string ImageUri
-    {
-        get { return (string)GetValue(ImageUriProperty); }
-        set { SetValue(ImageUriProperty, value); }
-    }
-    //----Imageuri-end-----\\
-    */
+        }      
 
     private void Home_Click(object sender, RoutedEventArgs e)
         {
@@ -120,9 +97,10 @@ namespace WpfApp1
                    // txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
 
                  transfer = new FTPImageTransfer("192.168.168.1", "drone", "NEVERAGAIN");
-
+                string name = "UI_Image" + DateTime.Now;
                 //uploads image with name of ui_Image and the date
-                transfer.Upload_2(openFileDialog.FileName, "UI_Image" + DateTime.Now);
+                transfer.Upload_2(openFileDialog.FileName, name);
+                comms.SendImage(name);
             }
             else
             {
@@ -136,6 +114,24 @@ namespace WpfApp1
             isSearching = false;
             //ImageUri = "user-1-glyph-icon_MkuBPp8O.png";
             
+        }
+
+        private static UI_Network comms = new UI_Network();
+
+        private void Start_Button_Click(object sender, RoutedEventArgs e)
+        {
+            comms.SendStart();
+
+        }
+
+        private void Stop_Button_Click(object sender, RoutedEventArgs e)
+        {
+            comms.SendStop();
+        }
+
+        private void KillSwitch_Click(object sender, RoutedEventArgs e)
+        {
+            comms.SendKill();
         }
     }
 }
