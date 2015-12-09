@@ -83,23 +83,24 @@ namespace WpfApp1
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 //Only allows Images
                 openFileDialog.Filter = "Image Files (*.png, *.jpg,*.bmp)|*.png;*.jpg;*.bmp";
+                openFileDialog.FilterIndex = 1;
                 //sets default directory when opening
                 openFileDialog.InitialDirectory = @"C:\";
                 //Title of image picker window
                 openFileDialog.Title = "Select Image of person to be searched for";
 
+                bool? click_ok = openFileDialog.ShowDialog();
 
+                if (click_ok == true)
+                {
+                    // txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
+                    transfer = new FTPImageTransfer("ftp://192.168.168.1", "drone", "NEVERAGAIN");
+                    string name = "ui_image.png"; // + DateTime.Now;
+                    //uploads image with name of ui_Image and the date
 
-
-                //idk
-                if (openFileDialog.ShowDialog() == true)
-                   // txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
-
-                 transfer = new FTPImageTransfer("192.168.168.1", "drone", "NEVERAGAIN");
-                string name = "UI_Image" + DateTime.Now;
-                //uploads image with name of ui_Image and the date
-                transfer.Upload_2(openFileDialog.FileName, name);
-                comms.SendImage(name);
+                    transfer.Upload(openFileDialog.FileName, name);
+                    comms.SendImage(name);
+                }
             }
             else
             {

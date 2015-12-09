@@ -14,13 +14,13 @@ namespace WpfApp1
             Password = password;
         }
 
-        public void Upload_2(String path, String name)
+        public void Upload(String path, String name)
         {
             using (WebClient webClient = new WebClient())
             {
                 webClient.Credentials = new NetworkCredential(Login, Password);
                 byte[] b = webClient.UploadFile(Address + "//" + name, "STOR", path);
-                Console.WriteLine(System.Text.Encoding.ASCII.GetString(b));
+                //Console.WriteLine(System.Text.Encoding.ASCII.GetString(b));
             }
         }
 

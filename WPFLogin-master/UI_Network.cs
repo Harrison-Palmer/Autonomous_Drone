@@ -12,27 +12,23 @@ namespace WpfApp1
 
         int iPort;
         String strHost;
-        TcpListener listener;
-        TcpClient client;
+        Socket connection;
 
         public SocketConnection(int port, string host)
         {
             iPort = port;
             strHost = host;
-            listener = new TcpListener(IPAddress.Parse(strHost), iPort);
+            connection = new Socket(AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp);
+            connection.Connect(strHost, iPort);
         }
 
         public NetworkStream Connect() //should be in a thread
         {
-            listener.Start();
-            client = listener.AcceptTcpClient();
-            return client.GetStream();
+            return new NetworkStream(connection);
         }
 
-        public TcpClient getClient()
-        {
-            return client;
-        }
     }
 
     class UI_Network
@@ -47,9 +43,8 @@ namespace WpfApp1
 
             ui = new SocketConnection(UI_PORT, LOCAL_IP);
 
-            UI_STREAM = null;
-
-            UI_CLIENT = null;
+            UI_STREAM = ui.Connect();
+            
         }
 
         public void SendStart()
@@ -83,7 +78,6 @@ namespace WpfApp1
             LOGFILE.WriteLine(">> LISTENING: port " + UI_PORT + " " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
 
             UI_STREAM = ui.Connect();
-            UI_CLIENT = ui.getClient();
 
             LOGFILE.WriteLine(">> CLIENT CONNECTED: UI " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
 
