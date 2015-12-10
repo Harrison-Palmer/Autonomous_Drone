@@ -95,7 +95,8 @@ namespace WpfApp1
                 {
                     // txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
                     transfer = new FTPImageTransfer("ftp://192.168.168.1", "drone", "NEVERAGAIN");
-                    string name = "ui_image.png"; // + DateTime.Now;
+                    string data = "";//DateTime.Now.ToString();
+                    string name = "ui_image" + data + ".png"; // + DateTime.Now;
                     //uploads image with name of ui_Image and the date
 
                     transfer.Upload(openFileDialog.FileName, name);
