@@ -6,7 +6,6 @@ namespace WpfApp1
 {
     class FTPImageTransfer
     {
-
         public FTPImageTransfer(string address, string login, string password)
         {
             Address = address;
@@ -27,7 +26,6 @@ namespace WpfApp1
         public string Address { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-
     }
 }
 

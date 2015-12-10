@@ -16,12 +16,12 @@ namespace WpfApp1
 
         public SocketConnection(int port, string host)
         {
-            iPort = port;
-            strHost = host;
-            connection = new Socket(AddressFamily.InterNetwork,
-                SocketType.Stream,
-                ProtocolType.Tcp);
-            connection.Connect(strHost, iPort);
+                iPort = port;
+                strHost = host;
+                connection = new Socket(AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp);
+                connection.Connect(strHost, iPort);
         }
 
         public NetworkStream Connect() //should be in a thread
@@ -43,8 +43,10 @@ namespace WpfApp1
 
             ui = new SocketConnection(UI_PORT, LOCAL_IP);
 
-            UI_STREAM = ui.Connect();
-            
+            if (UI_STREAM.CanWrite)
+                UI_STREAM = ui.Connect();
+            else
+                Console.Write("");
         }
 
         public void SendStart()
@@ -72,6 +74,8 @@ namespace WpfApp1
             UI_STREAM.Write(Encoding.ASCII.GetBytes(fn), 0, Encoding.ASCII.GetByteCount(fn));
             LOGFILE.WriteLine(">> Sent: \"" + fn + "\" TO SERVER " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
         }
+
+
 
         Thread networkCom = new Thread(delegate ()
         {
@@ -106,6 +110,7 @@ namespace WpfApp1
                         // TODO: DO FTP STUFF TO GET <filename> OFF OF SERVER
 
                         break;
+
                     default:
                         // Invalid Signal
                         UI_STREAM.Write(Encoding.ASCII.GetBytes("NO"), 0, 2);

@@ -28,13 +28,13 @@ namespace WpfApp1
     {
 
         bool isSearching = false;
-        //String dir_path = @"%USERPROFILE%\\My Documents\\Downloads";
-
-        //private System.Windows.Forms.MonthCalendar monthCalendar1;
+        string myImage = "C:\\Users\\hpalmer.LRC\\Source\\Repos\\Drone_ui\\WPFLogin-master\\user-1-glyph-icon_MkuBPp8O.png";
 
         public Main_Menu()
         {
-                InitializeComponent();
+            InitializeComponent();
+            search_for_image.Source = initilizeImage();
+            person_found.Source = initilizeImage();
         }      
 
     private void Home_Click(object sender, RoutedEventArgs e)
@@ -54,14 +54,6 @@ namespace WpfApp1
             newW.Show();
 
             this.Close();
-        }
-        private void No_click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void Yes_click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         //TODO - make it not crash
@@ -99,8 +91,14 @@ namespace WpfApp1
                     string name = "ui_image" + data + ".png"; // + DateTime.Now;
                     //uploads image with name of ui_Image and the date
 
+                    //will set the image to the selected one
+                    myImage = openFileDialog.FileName;
+
                     transfer.Upload(openFileDialog.FileName, name);
-                    comms.SendImage(name);
+                   // comms.SendImage(name);
+
+                    //sets imagebox with image
+                    search_for_image.Source = setImage();
                 }
             }
             else
@@ -110,20 +108,38 @@ namespace WpfApp1
             }
         }
 
+        void RetrieveImage()
+        {
+            UI_Network Network = new UI_Network();
+
+            myImage = "/*set to the incoming image**/";
+
+            person_found.Source = setImage();
+        }
+
+        BitmapImage setImage()
+        {
+            BitmapImage b = new BitmapImage();
+            b.BeginInit();
+            b.UriSource = new Uri(myImage);
+            b.EndInit();
+            return b;
+        }
+
         private void Stop_Button1_Click(object sender, RoutedEventArgs e)
         {
             isSearching = false;
-            //TODO reset images
-            
+            //TODO reset images;
+            RetrieveImage();
         }
 
-        private static UI_Network comms = new UI_Network();
+       // private static UI_Network comms = new UI_Network();
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                comms.SendStart();
+                //comms.SendStart();
             }
            catch
             {
@@ -135,17 +151,17 @@ namespace WpfApp1
         {
             try
             {
-                comms.SendStop();
+               //comms.SendStop();
             }
             catch
             {
-
+                Console.Write("");
             }
         }
 
         private void KillSwitch_Click(object sender, RoutedEventArgs e)
         {
-            comms.SendKill();
+           // comms.SendKill();
         }
     }
 }

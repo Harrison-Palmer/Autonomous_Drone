@@ -138,12 +138,6 @@
         <Label x:Name="label2" Content="" HorizontalAlignment="Left" Margin="-277.498,3.594,0,0" d:LayoutOverrides="Height"/>
         <Label x:Name="Welcome_text" Content="Welcome, Today is " HorizontalAlignment="Left" Margin="-347.141,0,0,-4.233" d:LayoutOverrides="Height" Width="166.344" Initialized="label3_Initialized"/>
         <Rectangle Fill="#FF1D1C1C" HorizontalAlignment="Right" Height="240.437" Margin="-347.141,0,7.141,-589.111" Stroke="Black" VerticalAlignment="Bottom" Width="340"/>
-        <Rectangle x:Name="search_for_image" Height="170" Margin="-347.141,0,177.141,-518.674" Stroke="Black" VerticalAlignment="Bottom">
-            <Rectangle.Fill>
-                <ImageBrush ImageSource="user-1-glyph-icon_MkuBPp8O.png"/>
-            </Rectangle.Fill>
-        </Rectangle>
-        <Rectangle x:Name="Person_found" HorizontalAlignment="Left" Height="170" Margin="-177.141,0,0,-518.674" Stroke="Black" VerticalAlignment="Bottom" Width="170" Fill="#FFA48787"/>
         <Label x:Name="label3" Content="Searching for:" HorizontalAlignment="Left" Margin="-347.141,0,0,-543.95" VerticalAlignment="Bottom" Height="25.276" Width="170" FontFamily="Verdana" Foreground="#FFFFF3F3" BorderBrush="#FF5F5C5C" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center"/>
         <Label x:Name="label3_Copy" Content="Potential match:" HorizontalAlignment="Left" Margin="-177.141,0,0,-543.95" VerticalAlignment="Bottom" Height="25.276" Width="170" FontFamily="Verdana" Foreground="#FFFFF3F3" BorderBrush="#FF5F5C5C" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center"/>
         <!--Start search button-->
@@ -161,6 +155,8 @@
         <Label x:Name="time_left_label" Content="" HorizontalAlignment="Left" Margin="-876.922,0,0,-565.354" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
         <Label x:Name="status_label" Content="" HorizontalAlignment="Left" Margin="-876.922,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
         <Label x:Name="found_label" Content="" HorizontalAlignment="Left" Margin="-876.922,0,0,-648.714" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
+        <Image x:Name="person_found" HorizontalAlignment="Left" Height="170" Margin="-177.141,0,0,-518.674" VerticalAlignment="Bottom" Width="170"/>
+        <Image x:Name="search_for_image" HorizontalAlignment="Left" Height="170" Margin="-347.141,0,0,-518.674" VerticalAlignment="Bottom" Width="170" Stretch="UniformToFill"/>
 
 
     </Grid>
