@@ -43,10 +43,10 @@ namespace WpfApp1
 
             ui = new SocketConnection(UI_PORT, LOCAL_IP);
 
-            if (UI_STREAM.CanWrite)
+            //if (UI_STREAM.CanWrite)
                 UI_STREAM = ui.Connect();
-            else
-                Console.Write("");
+            //else
+                //Console.Write("");
         }
 
         public void SendStart()

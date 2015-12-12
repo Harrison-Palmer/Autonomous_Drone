@@ -33,8 +33,8 @@ namespace WpfApp1
         public Main_Menu()
         {
             InitializeComponent();
-            search_for_image.Source = initilizeImage();
-            person_found.Source = initilizeImage();
+            //search_for_image.Source = initilizeImage();
+            //person_found.Source = initilizeImage();
         }      
 
     private void Home_Click(object sender, RoutedEventArgs e)
@@ -95,7 +95,7 @@ namespace WpfApp1
                     myImage = openFileDialog.FileName;
 
                     transfer.Upload(openFileDialog.FileName, name);
-                   // comms.SendImage(name);
+                    //comms.SendImage(name);
 
                     //sets imagebox with image
                     search_for_image.Source = setImage();
@@ -133,13 +133,13 @@ namespace WpfApp1
             RetrieveImage();
         }
 
-       // private static UI_Network comms = new UI_Network();
+        private static UI_Network comms = new UI_Network();
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //comms.SendStart();
+                comms.SendStart();
             }
            catch
             {
@@ -151,7 +151,7 @@ namespace WpfApp1
         {
             try
             {
-               //comms.SendStop();
+               comms.SendStop();
             }
             catch
             {
@@ -161,7 +161,7 @@ namespace WpfApp1
 
         private void KillSwitch_Click(object sender, RoutedEventArgs e)
         {
-           // comms.SendKill();
+             comms.SendKill();
         }
     }
 }
