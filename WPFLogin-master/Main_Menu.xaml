@@ -114,8 +114,8 @@
                 <ImageBrush ImageSource="flower.jpg" Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="Start_Button" Content="Start Drone" HorizontalAlignment="Left" Height="113.623" Margin="-999.532,154.321,0,-246.217" VerticalAlignment="Top" Width="170.221" FontSize="24" FontFamily="Verdana" Background="#FF5BB205" RenderTransformOrigin="0.528,-0.293" Click="Start_Button_Click"/>
-        <Button x:Name="Stop_Button" Content="Stop Drone" HorizontalAlignment="Left" Height="113.623" Margin="-793.84,154.321,0,-246.217" VerticalAlignment="Top" Width="170.221" Background="Red" FontFamily="Verdana" FontSize="24" RenderTransformOrigin="0.52,0.526" Click="Stop_Button_Click"/>
+        <Button x:Name="Start_Button" Content="Start Drone" HorizontalAlignment="Left" Margin="-798.073,490.46,0,-582.356" Width="170.221" FontSize="24" FontFamily="Verdana" Background="#FF5BB205" RenderTransformOrigin="0.528,-0.293" Click="Start_Button_Click"/>
+        <Button x:Name="Stop_Button" Content="Stop Drone" HorizontalAlignment="Left" Height="113.623" Margin="-797.852,604.083,0,-695.979" VerticalAlignment="Top" Width="170.221" Background="Red" FontFamily="Verdana" FontSize="24" RenderTransformOrigin="0.52,0.526" Click="Stop_Button_Click"/>
 
         <!--popup for logging out-->
         <!--
@@ -137,27 +137,25 @@
         -->
         <Label x:Name="label2" Content="" HorizontalAlignment="Left" Margin="-277.498,3.594,0,0" d:LayoutOverrides="Height"/>
         <Label x:Name="Welcome_text" Content="Welcome, Today is " HorizontalAlignment="Left" Margin="-347.141,0,0,-4.233" d:LayoutOverrides="Height" Width="166.344" Initialized="label3_Initialized"/>
-        <Rectangle Fill="#FF1D1C1C" HorizontalAlignment="Right" Height="240.437" Margin="-347.141,0,7.141,-589.111" Stroke="Black" VerticalAlignment="Bottom" Width="340"/>
-        <Label x:Name="label3" Content="Searching for:" HorizontalAlignment="Left" Margin="-347.141,0,0,-543.95" VerticalAlignment="Bottom" Height="25.276" Width="170" FontFamily="Verdana" Foreground="#FFFFF3F3" BorderBrush="#FF5F5C5C" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center"/>
-        <Label x:Name="label3_Copy" Content="Potential match:" HorizontalAlignment="Left" Margin="-177.141,0,0,-543.95" VerticalAlignment="Bottom" Height="25.276" Width="170" FontFamily="Verdana" Foreground="#FFFFF3F3" BorderBrush="#FF5F5C5C" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center"/>
+        <Rectangle Fill="#FF1D1C1C" HorizontalAlignment="Left" Height="415.451" Margin="-1241.634,0,0,-459.395" Stroke="Black" VerticalAlignment="Bottom" Width="620.773"/>
+        <Label x:Name="label3" Content="Searching for:" HorizontalAlignment="Left" Margin="-1241.634,0,0,-381.361" VerticalAlignment="Bottom" Height="43.674" Width="310.387" FontFamily="Verdana" Foreground="#FFFFF3F3" BorderBrush="#FF5F5C5C" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center" FontSize="21.333"/>
+        <Label x:Name="label3_Copy" Content="Potential match:" HorizontalAlignment="Left" Margin="-931.247,0,0,-381.361" VerticalAlignment="Bottom" Height="43.674" Width="310.386" FontFamily="Verdana" Foreground="#FFFFF3F3" BorderBrush="#FF5F5C5C" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center" FontSize="21.333"/>
         <!--Start search button-->
-        <Button x:Name="Start_Search" Style="{StaticResource SearchStyle}" Content="Start Search" Margin="-347.141,565.677,0,-571.886" Width="120.627" Height="27.936" Background="White" Foreground="White" BorderBrush="White" OpacityMask="White" Click="Start_Search_Click" Cursor="Hand" HorizontalAlignment="Left" BorderThickness="0"/>
+        <Button x:Name="Start_Search" Style="{StaticResource SearchStyle}" Content="Start Search" Margin="-1241.634,0,0,-429.634" Width="220.241" Height="48.271" Background="White" Foreground="White" BorderBrush="White" OpacityMask="White" Click="Start_Search_Click" Cursor="Hand" HorizontalAlignment="Left" BorderThickness="0" VerticalAlignment="Bottom" FontSize="21.333"/>
         <!--continue search button-->
         <Button x:Name="Continue_Searching" Style="{StaticResource SearchStyle}" Content="Continue Searching" Margin="-127.768,565.677,7.141,-571.886" Height="27.936" Background="White" Foreground="White" BorderBrush="White" OpacityMask="White" Cursor="Hand" BorderThickness="0" Visibility="Hidden" />
-        <Button x:Name="Stop_Button1" Style="{StaticResource SearchStyle}" Content="Stop" Margin="-221.514,565.677,132.768,-571.886" Width="88.746" Height="27.936" Background="White" Foreground="White" BorderBrush="White" OpacityMask="White" Cursor="Hand" Click="Stop_Button1_Click" />
+        <Button x:Name="Stop_Button1" Style="{StaticResource SearchStyle}" Content="Stop" Margin="-1012.264,0,0,-429.634" Width="162.033" Height="48.271" Background="White" Foreground="White" BorderBrush="White" OpacityMask="White" Cursor="Hand" Click="Stop_Button1_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="21.333" />
 
         <Rectangle Fill="#FF7B7B85" HorizontalAlignment="Left" Height="239.217" Margin="-1241.634,0,0,-700.009" Stroke="#FFA20606" VerticalAlignment="Bottom" Width="443.782"/>
         <Label x:Name="battery_Label" Content="Battery %:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="152.029" FontFamily="Verdana" FontSize="26.667"/>
         <Label x:Name="flying_status_Label" Content="Flying Status:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="196.042" FontFamily="Verdana" FontSize="26.667"/>
         <Label x:Name="last_found_Label" Content="Last Found:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-653.714" VerticalAlignment="Bottom" Height="41.68" Width="172.029" FontFamily="Verdana" FontSize="26.667"/>
         <Label x:Name="flight_time_Label" Content="Flight Time Left:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-560.354" VerticalAlignment="Bottom" Height="41.68" Width="230.037" FontFamily="Verdana" FontSize="26.667"/>
-        <Label x:Name="percent_label" Content="" HorizontalAlignment="Left" Margin="-876.922,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
-        <Label x:Name="time_left_label" Content="" HorizontalAlignment="Left" Margin="-876.922,0,0,-565.354" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
-        <Label x:Name="status_label" Content="" HorizontalAlignment="Left" Margin="-876.922,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
-        <Label x:Name="found_label" Content="" HorizontalAlignment="Left" Margin="-876.922,0,0,-648.714" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
-        <Image x:Name="person_found" HorizontalAlignment="Left" Height="170" Margin="-177.141,0,0,-518.674" VerticalAlignment="Bottom" Width="170"/>
-        <Image x:Name="search_for_image" HorizontalAlignment="Left" Height="170" Margin="-347.141,0,0,-518.674" VerticalAlignment="Bottom" Width="170" Stretch="UniformToFill"/>
-
-
+        <Label x:Name="percent_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
+        <Label x:Name="time_left_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-565.354" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
+        <Label x:Name="status_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
+        <Label x:Name="found_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-648.714" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
+        <Image x:Name="person_found" HorizontalAlignment="Left" Height="293.743" Margin="-931.247,0,0,-337.687" VerticalAlignment="Bottom" Width="310.386"/>
+        <Image x:Name="search_for_image" HorizontalAlignment="Left" Height="293.743" Margin="-1241.634,0,0,-337.687" VerticalAlignment="Bottom" Width="310.387" Stretch="UniformToFill"/>
     </Grid>
 </Window>

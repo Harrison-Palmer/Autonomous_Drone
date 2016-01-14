@@ -33,8 +33,6 @@ namespace WpfApp1
         public Main_Menu()
         {
             InitializeComponent();
-            //search_for_image.Source = initilizeImage();
-            //person_found.Source = initilizeImage();
         }      
 
     private void Home_Click(object sender, RoutedEventArgs e)
@@ -162,6 +160,16 @@ namespace WpfApp1
         private void KillSwitch_Click(object sender, RoutedEventArgs e)
         {
              comms.SendKill();
+        }
+
+        private void Can_Start()
+        {
+            if (isSearching == false)
+            {
+                Start_Button.IsEnabled = false;
+            }
+            else
+                Start_Button.IsEnabled = true;
         }
     }
 }
