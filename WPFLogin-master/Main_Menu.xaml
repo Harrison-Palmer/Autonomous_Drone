@@ -136,7 +136,7 @@
         </Grid>
         -->
         <Label x:Name="label2" Content="" HorizontalAlignment="Left" Margin="-277.498,3.594,0,0" d:LayoutOverrides="Height"/>
-        <Label x:Name="Welcome_text" Content="Welcome, Today is " HorizontalAlignment="Left" Margin="-347.141,0,0,-4.233" d:LayoutOverrides="Height" Width="166.344" Initialized="label3_Initialized"/>
+        <Label x:Name="Welcome_text" Content="Welcome, Today is " HorizontalAlignment="Left" Margin="-347.141,0,0,-4.233" d:LayoutOverrides="Height" Width="166.344"/>
         <Rectangle Fill="#FF1D1C1C" HorizontalAlignment="Left" Height="415.451" Margin="-1241.634,0,0,-459.395" Stroke="Black" VerticalAlignment="Bottom" Width="620.773"/>
         <Label x:Name="label3" Content="Searching for:" HorizontalAlignment="Left" Margin="-1241.634,0,0,-381.361" VerticalAlignment="Bottom" Height="43.674" Width="310.387" FontFamily="Verdana" Foreground="#FFFFF3F3" BorderBrush="#FF5F5C5C" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center" FontSize="21.333"/>
         <Label x:Name="label3_Copy" Content="Potential match:" HorizontalAlignment="Left" Margin="-931.247,0,0,-381.361" VerticalAlignment="Bottom" Height="43.674" Width="310.386" FontFamily="Verdana" Foreground="#FFFFF3F3" BorderBrush="#FF5F5C5C" BorderThickness="0,0,0,1" HorizontalContentAlignment="Center" FontSize="21.333"/>

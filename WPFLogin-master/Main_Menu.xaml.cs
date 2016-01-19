@@ -28,7 +28,7 @@ namespace WpfApp1
     {
 
         bool isSearching = false;
-        string myImage = "C:\\Users\\hpalmer.LRC\\Source\\Repos\\Drone_ui\\WPFLogin-master\\user-1-glyph-icon_MkuBPp8O.png";
+        string myImage = "C:\\Users\\hpalmer\\Source\\Repos\\Drone_ui\\WPFLogin-master\\user-1-glyph-icon_MkuBPp8O.png";
 
         public Main_Menu()
         {
@@ -54,11 +54,6 @@ namespace WpfApp1
             this.Close();
         }
 
-        //TODO - make it not crash
-        private void label3_Initialized(object sender, EventArgs e)
-        {
-         // this.Welcome_text.Content = this.monthCalendar1.SelectionRange.Start.ToShortDateString();
-        }
         //
         private void Start_Search_Click(object sender, RoutedEventArgs e)
         {
@@ -131,13 +126,13 @@ namespace WpfApp1
             RetrieveImage();
         }
 
-        private static UI_Network comms = new UI_Network();
+        //private static UI_Network comms = new UI_Network();
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                comms.SendStart();
+              //  comms.SendStart();
             }
            catch
             {
@@ -149,7 +144,7 @@ namespace WpfApp1
         {
             try
             {
-               comms.SendStop();
+              // comms.SendStop();
             }
             catch
             {
@@ -159,9 +154,9 @@ namespace WpfApp1
 
         private void KillSwitch_Click(object sender, RoutedEventArgs e)
         {
-             comms.SendKill();
+           //  comms.SendKill();
         }
-
+        
         private void Can_Start()
         {
             if (isSearching == false)
