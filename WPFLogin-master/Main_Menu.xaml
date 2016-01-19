@@ -114,8 +114,8 @@
                 <ImageBrush ImageSource="flower.jpg" Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
-        <Button x:Name="Start_Button" Content="Start Drone" HorizontalAlignment="Left" Margin="-798.073,490.46,0,-582.356" Width="170.221" FontSize="24" FontFamily="Verdana" Background="#FF5BB205" RenderTransformOrigin="0.528,-0.293" Click="Start_Button_Click"/>
-        <Button x:Name="Stop_Button" Content="Stop Drone" HorizontalAlignment="Left" Height="113.623" Margin="-797.852,604.083,0,-695.979" VerticalAlignment="Top" Width="170.221" Background="Red" FontFamily="Verdana" FontSize="24" RenderTransformOrigin="0.52,0.526" Click="Stop_Button_Click"/>
+        <Button x:Name="Start_Button" Content="Start Drone" HorizontalAlignment="Left" Margin="-797.852,484.99,0,-576.886" Width="170.221" FontSize="24" FontFamily="Verdana" Background="#FF5BB205" RenderTransformOrigin="0.528,-0.293" Click="Start_Button_Click"/>
+        <Button x:Name="Stop_Button" Content="Stop Drone" HorizontalAlignment="Left" Height="113.623" Margin="-797.852,603.613,0,-695.509" VerticalAlignment="Top" Width="170.221" Background="Red" FontFamily="Verdana" FontSize="24" RenderTransformOrigin="0.52,0.526" Click="Stop_Button_Click"/>
 
         <!--popup for logging out-->
         <!--
@@ -157,5 +157,8 @@
         <Label x:Name="found_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-648.714" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
         <Image x:Name="person_found" HorizontalAlignment="Left" Height="293.743" Margin="-931.247,0,0,-337.687" VerticalAlignment="Bottom" Width="310.386"/>
         <Image x:Name="search_for_image" HorizontalAlignment="Left" Height="293.743" Margin="-1241.634,0,0,-337.687" VerticalAlignment="Bottom" Width="310.387" Stretch="UniformToFill"/>
+        <Label x:Name="Upload_status" Content="" HorizontalAlignment="Left" Margin="-1234.969,0,0,-459.395" VerticalAlignment="Bottom" Width="220.241" FontSize="16"/>
+        <Label x:Name="last_found_Label_Copy" Content="Safe To Fly:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-695.394" VerticalAlignment="Bottom" Height="41.68" Width="172.029" FontFamily="Verdana" FontSize="26.667"/>
+        <Label x:Name="found_label_Copy" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-690.394" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>

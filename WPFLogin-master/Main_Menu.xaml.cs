@@ -33,9 +33,10 @@ namespace WpfApp1
         public Main_Menu()
         {
             InitializeComponent();
+            Can_Start();
         }      
 
-    private void Home_Click(object sender, RoutedEventArgs e)
+        private void Home_Click(object sender, RoutedEventArgs e)
         {
             //NavigationService.Navigate(new Uri("test.xaml", UriKind.Relative));
         }
@@ -57,6 +58,9 @@ namespace WpfApp1
         //
         private void Start_Search_Click(object sender, RoutedEventArgs e)
         {
+            //resets the upload fail/pass dialog box
+            Upload_status.Content = "";
+
             FTPImageTransfer transfer = null;
             if (!isSearching)
             {
@@ -75,48 +79,39 @@ namespace WpfApp1
                 openFileDialog.Title = "Select Image of person to be searched for";
 
                 bool? click_ok = openFileDialog.ShowDialog();
-
-                if (click_ok == true)
+                
+                //sets variable myImage to the uploaded image
+                myImage = openFileDialog.FileName;
+                //sets image box to the image path in myImage
+                search_for_image.Source = setImage();
+                
+                try
                 {
-                    // txtEditor.Text = File.ReadAllText(openFileDialog.FileName);
-                    transfer = new FTPImageTransfer("ftp://192.168.168.1", "drone", "NEVERAGAIN");
-                    string data = "";//DateTime.Now.ToString();
-                    string name = "ui_image" + data + ".png"; // + DateTime.Now;
-                    //uploads image with name of ui_Image and the date
+                    if (click_ok == true)
+                    {
+                        transfer = new FTPImageTransfer("ftp://192.168.168.1", "drone", "NEVERAGAIN");
+                        string data = "";//DateTime.Now.ToString();
+                        string name = "ui_image" + data + ".png"; // + DateTime.Now;
+                                                                  //uploads image with name of ui_Image and the date
 
-                    //will set the image to the selected one
-                    myImage = openFileDialog.FileName;
+                        transfer.Upload(openFileDialog.FileName, name);
+                        //comms.SendImage(name);
 
-                    transfer.Upload(openFileDialog.FileName, name);
-                    //comms.SendImage(name);
-
-                    //sets imagebox with image
-                    search_for_image.Source = setImage();
+                        Upload_status.Foreground = Brushes.Green;
+                        Upload_status.Content = "Image succesfully uploaded.";
+                    }
+                    else
+                    {
+                        isSearching = true;
+                    }
                 }
-            }
-            else
-            {
-                isSearching = true;
-
-            }
-        }
-
-        void RetrieveImage()
-        {
-            UI_Network Network = new UI_Network();
-
-            myImage = "/*set to the incoming image**/";
-
-            person_found.Source = setImage();
-        }
-
-        BitmapImage setImage()
-        {
-            BitmapImage b = new BitmapImage();
-            b.BeginInit();
-            b.UriSource = new Uri(myImage);
-            b.EndInit();
-            return b;
+                catch (Exception ex)
+                {
+                    Upload_status.Foreground = Brushes.Red;
+                    Upload_status.Content = "Image failed to upload.";
+                }
+                
+            } 
         }
 
         private void Stop_Button1_Click(object sender, RoutedEventArgs e)
@@ -152,19 +147,47 @@ namespace WpfApp1
             }
         }
 
+        //forces the drone to stop
         private void KillSwitch_Click(object sender, RoutedEventArgs e)
         {
            //  comms.SendKill();
         }
         
+        //disables the drone buttons if there is no person being searched for yet
         private void Can_Start()
         {
             if (isSearching == false)
             {
                 Start_Button.IsEnabled = false;
+                Start_Button.Content = "Please Select \n a target first.";
+                Stop_Button.IsEnabled = false;
+                Stop_Button.Content = "Please Select \n a target first.";
             }
             else
+            {
                 Start_Button.IsEnabled = true;
+                Start_Button.Content = "Start Drone";
+                Stop_Button.IsEnabled = false;
+                Stop_Button.Content = "Stop Drone";
+            }  
+        }
+
+        void RetrieveImage()
+        {
+            UI_Network Network = new UI_Network();
+
+            myImage = "/*set to the incoming image**/";
+
+            person_found.Source = setImage();
+        }
+
+        BitmapImage setImage()
+        {
+            BitmapImage b = new BitmapImage();
+            b.BeginInit();
+            b.UriSource = new Uri(myImage);
+            b.EndInit();
+            return b;
         }
     }
 }
