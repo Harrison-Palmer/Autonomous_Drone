@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
+using System.Threading.Tasks;
 //using System.Windows.Forms;
 
 namespace WpfApp1
@@ -34,6 +36,7 @@ namespace WpfApp1
         {
             InitializeComponent();
             Can_Start();
+            Safe_to_Fly();
         }      
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -188,6 +191,27 @@ namespace WpfApp1
             b.UriSource = new Uri(myImage);
             b.EndInit();
             return b;
+        }
+
+        void Safe_to_Fly()
+        {
+            string data;
+            int value;
+
+            XmlDocument pullWeather = new XmlDocument();
+            pullWeather.Load("http://api.openweathermap.org/data/2.5/weather?zip=03060,us&mode=xml&appid=f95d4be882833be32b011342f0b6abc5");
+            
+            data = pullWeather.SelectSingleNode("/current/weather").Attributes[0].InnerText;
+
+            Int32.TryParse(data, out value);
+
+            if (value / 100 == 8)
+            {
+                found_label_Copy.Content = "Safe";
+            }
+            else
+                found_label_Copy.Content = "Not Safe";
+            /*codes => http://openweathermap.org/weather-conditions */
         }
     }
 }
