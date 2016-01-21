@@ -16,6 +16,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 //using System.Windows.Forms;
 
 namespace WpfApp1
@@ -29,13 +31,14 @@ namespace WpfApp1
     public partial class Main_Menu : Window
     {
 
+        Stopwatch stopwatch = new Stopwatch();
+
         bool isSearching = false;
         string myImage = "C:\\Users\\hpalmer\\Source\\Repos\\Drone_ui\\WPFLogin-master\\user-1-glyph-icon_MkuBPp8O.png";
 
         public Main_Menu()
         {
             InitializeComponent();
-            Can_Start();
             Safe_to_Fly();
         }      
 
@@ -58,11 +61,14 @@ namespace WpfApp1
             this.Close();
         }
 
-        //
         private void Start_Search_Click(object sender, RoutedEventArgs e)
         {
             //resets the upload fail/pass dialog box
-            Upload_status.Content = "";
+            status_box.Foreground = Brushes.Yellow;
+            status_box.Content = "User Selecting target. ";
+
+            status_label.Foreground = Brushes.Yellow;
+            status_label.Content = "Standby";
 
             FTPImageTransfer transfer = null;
             if (!isSearching)
@@ -100,8 +106,21 @@ namespace WpfApp1
                         transfer.Upload(openFileDialog.FileName, name);
                         //comms.SendImage(name);
 
-                        Upload_status.Foreground = Brushes.Green;
-                        Upload_status.Content = "Image succesfully uploaded.";
+                        status_box.Foreground = Brushes.Green;
+                        if (Start_Search.Content == "New Search")
+                            status_box.Content = "Image succesfully uploaded, Searching for new target. ";
+                        else
+                            status_box.Content = "Image succesfully uploaded, Drone starting. ";
+
+                        status_label.Foreground = Brushes.Green;
+                        status_label.Content = "Active";
+
+                        //starts the timer, if user picks new target timer does not reset
+                        if (!(stopwatch.Elapsed.Seconds > 0))
+                            stopwatch.Start();
+                       // stopwatch.Stop();
+                        timer_label.Content = stopwatch.Elapsed;
+
                     }
                     else
                     {
@@ -110,22 +129,44 @@ namespace WpfApp1
                 }
                 catch (Exception ex)
                 {
-                    Upload_status.Foreground = Brushes.Red;
-                    Upload_status.Content = "Image failed to upload.";
+                    status_box.Foreground = Brushes.Red;
+                    status_box.Content = "Image failed to upload, Drone not started. ";
+
+                    status_label.Foreground = Brushes.Red;
+                    status_label.Content = "Inactive";
                 }
                 
-            } 
+            }            
         }
 
         private void Stop_Button1_Click(object sender, RoutedEventArgs e)
         {
             isSearching = false;
-            //TODO reset images;
-            RetrieveImage();
+            
+            //reset images
+            search_for_image.Source = null;
+            person_found.Source = null;
+
+            status_box.Foreground = Brushes.Red;
+            status_box.Content= "Drone Stopped. ";
+
+            status_label.Foreground = Brushes.Red;
+            status_label.Content = "Inactive";
+
+           // RetrieveImage();
+        }
+
+        private void Continue_Searching_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO - make drone continue searching
+
+            status_box.Foreground = Brushes.Green;
+            status_box.Content = "continuing Search. ";
         }
 
         //private static UI_Network comms = new UI_Network();
 
+        //TODO integrate & remove
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -137,7 +178,7 @@ namespace WpfApp1
                
             }
         }
-
+        //TODO integrate & remove
         private void Stop_Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -155,24 +196,49 @@ namespace WpfApp1
         {
            //  comms.SendKill();
         }
-        
-        //disables the drone buttons if there is no person being searched for yet
-        private void Can_Start()
+
+        void Safe_to_Fly()
         {
-            if (isSearching == false)
+            bool connect = true;
+            string data = "";
+            int value;
+
+            safe_to_fly_status.Foreground = Brushes.Black;
+
+            XmlDocument pullWeather = new XmlDocument();
+
+            try
             {
-                Start_Button.IsEnabled = false;
-                Start_Button.Content = "Please Select \n a target first.";
-                Stop_Button.IsEnabled = false;
-                Stop_Button.Content = "Please Select \n a target first.";
+                pullWeather.Load("http://api.openweathermap.org/data/2.5/weather?zip=03060,us&mode=xml&appid=f95d4be882833be32b011342f0b6abc5");
+
+                data = pullWeather.SelectSingleNode("/current/weather").Attributes[0].InnerText;
             }
-            else
+            catch (Exception ex)
             {
-                Start_Button.IsEnabled = true;
-                Start_Button.Content = "Start Drone";
-                Stop_Button.IsEnabled = false;
-                Stop_Button.Content = "Stop Drone";
-            }  
+                connect = false;
+
+                status_box.Foreground = Brushes.Red;
+                status_box.Content = "Failed to retrieve weather information. ";
+
+                safe_to_fly_status.Foreground = Brushes.Black;
+                safe_to_fly_status.Content = "Unknown";
+            }
+
+            Int32.TryParse(data, out value);
+
+            if (value / 100 == 8)
+            {
+                safe_to_fly_status.Foreground = Brushes.Green;
+                safe_to_fly_status.Content = "Safe";
+            }
+            else if (connect != false)
+            {
+                safe_to_fly_status.Foreground = Brushes.Red;
+                safe_to_fly_status.Content = "Not Safe";
+            }
+            /*codes => http://openweathermap.org/weather-conditions */
+
+
         }
 
         void RetrieveImage()
@@ -193,25 +259,5 @@ namespace WpfApp1
             return b;
         }
 
-        void Safe_to_Fly()
-        {
-            string data;
-            int value;
-
-            XmlDocument pullWeather = new XmlDocument();
-            pullWeather.Load("http://api.openweathermap.org/data/2.5/weather?zip=03060,us&mode=xml&appid=f95d4be882833be32b011342f0b6abc5");
-            
-            data = pullWeather.SelectSingleNode("/current/weather").Attributes[0].InnerText;
-
-            Int32.TryParse(data, out value);
-
-            if (value / 100 == 8)
-            {
-                found_label_Copy.Content = "Safe";
-            }
-            else
-                found_label_Copy.Content = "Not Safe";
-            /*codes => http://openweathermap.org/weather-conditions */
-        }
     }
 }
