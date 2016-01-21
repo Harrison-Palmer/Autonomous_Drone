@@ -14,7 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using System.Windows.Forms;
+
+
 
 namespace WpfApp1
 {
@@ -87,11 +88,50 @@ namespace WpfApp1
                     //will set the image to the selected one
                     myImage = openFileDialog.FileName;
 
-                    transfer.Upload(openFileDialog.FileName, name);
+                   // transfer.Upload(openFileDialog.FileName, name);
                     //comms.SendImage(name);
 
                     //sets imagebox with image
-                    search_for_image.Source = setImage();
+                     search_for_image.Source = setImage(); // Displays initial image on UI
+
+                    RetrieveImage();
+
+                    MessageBoxResult result =  MessageBox.Show("Is this the person you were looking for?", "Person Confirmation", MessageBoxButton.YesNoCancel);
+                 
+                    if (result == MessageBoxResult.Yes )
+                    {
+                        // comms.SendStop(); // stop the drone?
+
+
+                    }
+
+
+                    else if (result == MessageBoxResult.No)
+                    {
+                        MessageBoxResult keepsearching = MessageBox.Show("Would you like to keep searching?", "Continue searching", MessageBoxButton.YesNoCancel);
+
+                        if (keepsearching == MessageBoxResult.Yes)
+                        {
+
+                            person_found.Source = null; // Sets found image to null
+                            // Drone code?
+                            //  comms.SendStart();
+
+                        }
+
+                        else if (keepsearching == MessageBoxResult.No)
+                        {
+                            // comms.SendStop();
+
+                           
+                        }
+
+                        
+                    }
+
+   
+
+                
                 }
             }
             else
@@ -103,11 +143,27 @@ namespace WpfApp1
 
         void RetrieveImage()
         {
-            UI_Network Network = new UI_Network();
+            //  UI_Network Network = new UI_Network();
 
-            myImage = "/*set to the incoming image**/";
+            // myImage = @"K:\Senior\ariana.jpg";
 
-            person_found.Source = setImage();
+
+            // Test File Path.. replace with path from Networks
+
+            string filePath2 = @"K:\Senior\ariana.jpg";
+
+            Uri fileUri2 = new Uri(filePath2);
+
+            BitmapImage bitmapSource2 = new BitmapImage();
+            bitmapSource2.BeginInit();
+            bitmapSource2.CacheOption = BitmapCacheOption.None;
+            bitmapSource2.UriSource = fileUri2;
+;            bitmapSource2.EndInit();
+
+            person_found.Source = bitmapSource2;
+
+            
+
         }
 
         BitmapImage setImage()
@@ -119,11 +175,21 @@ namespace WpfApp1
             return b;
         }
 
-        private void Stop_Button1_Click(object sender, RoutedEventArgs e)
+        private void Stop_Button1_Click(object sender, RoutedEventArgs e) // Button controlling Network
         {
+
             isSearching = false;
-            //TODO reset images;
-            RetrieveImage();
+
+            //RetrieveImage();
+
+
+
+            //// Resets images
+            person_found.Source = null;
+            search_for_image.Source = null;
+
+
+
         }
 
         //private static UI_Network comms = new UI_Network();
