@@ -34,25 +34,32 @@ namespace WpfApp1
         Stopwatch stopwatch = new Stopwatch();
 
         bool isSearching = false;
-        string myImage = "C:\\Users\\hpalmer\\Source\\Repos\\Drone_ui\\WPFLogin-master\\user-1-glyph-icon_MkuBPp8O.png";
+        string myImage = "";
+        //(put in every function that uses it) 
+        //private static UI_Network comms = new UI_Network();
 
+        // Constructor
         public Main_Menu()
         {
             InitializeComponent();
             Safe_to_Fly();
         }      
 
+        // Returns to the main menu page.
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             //NavigationService.Navigate(new Uri("test.xaml", UriKind.Relative));
         }
 
         //mouse hover - home
+        //TODO - remove and put in designer properties/XAML
         private void Home_MouseEnter(object sender, MouseEventArgs e)
         {
             this.Cursor = Cursors.Hand;
         }
 
+        // Closes the application window, logs current user out, 
+        // then re-opens login window.
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             var newW = new login();
@@ -61,9 +68,11 @@ namespace WpfApp1
             this.Close();
         }
 
+        // Send signal to drone to commence searching for the selected target.
+        //TODO - handle new search while already searching 
         private void Start_Search_Click(object sender, RoutedEventArgs e)
         {
-            //resets the upload fail/pass dialog box
+            // Resets the upload fail/pass dialog box
             status_box.Foreground = Brushes.Yellow;
             status_box.Content = "User Selecting target. ";
 
@@ -71,41 +80,58 @@ namespace WpfApp1
             status_label.Content = "Standby";
 
             FTPImageTransfer transfer = null;
+
+            // Begins the drone search process by having the user select a image of
+            // the target.
             if (!isSearching)
             {
-                //shows continue searching button
+                // Shows continue searching button.
                 Continue_Searching.Visibility = Visibility.Visible;
                 Start_Search.Content = "New Search";
 
-                //makes filepicker window object
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                //Only allows Images
+                // Makes filepicker window object.
+                var openFileDialog = new OpenFileDialog();
+                // Only allows Images.
                 openFileDialog.Filter = "Image Files (*.png, *.jpg,*.bmp)|*.png;*.jpg;*.bmp";
                 openFileDialog.FilterIndex = 1;
-                //sets default directory when opening
+                // Sets default directory when opening.
                 openFileDialog.InitialDirectory = @"C:\";
-                //Title of image picker window
+                // Title of image picker window.
                 openFileDialog.Title = "Select Image of person to be searched for";
 
                 bool? click_ok = openFileDialog.ShowDialog();
                 
-                //sets variable myImage to the uploaded image
+                // Sets variable myImage to the uploaded image.
                 myImage = openFileDialog.FileName;
-                //sets image box to the image path in myImage
+                // Sets image box to the image path in myImage.
                 search_for_image.Source = setImage();
-                
+
+                // Attemps to send user-selected image to server for drone search.
                 try
                 {
                     if (click_ok == true)
                     {
+                        // Makes a new FTP connection to the server.
                         transfer = new FTPImageTransfer("ftp://192.168.168.1", "drone", "NEVERAGAIN");
-                        string data = "";//DateTime.Now.ToString();
-                        string name = "ui_image" + data + ".png"; // + DateTime.Now;
-                                                                  //uploads image with name of ui_Image and the date
+                        // Uses DateTime.Now.ToString();.
+                        var data = "";
+                        // Uploads image with name of ui_Image and the date.
+                        var name = "ui_image" + data + ".png"; 
 
+                        // Sends image file to server.
                         transfer.Upload(openFileDialog.FileName, name);
-                        //comms.SendImage(name);
 
+                        try
+                        {
+                            //comms.SendImage(name);
+                            //  comms.SendStart();
+                        }
+                        catch
+                        {
+
+                        }
+
+                        // Sets Dialog box's color and text with respect to the image upload result
                         status_box.Foreground = Brushes.Green;
                         if (Start_Search.Content == "New Search")
                             status_box.Content = "Image succesfully uploaded, Searching for new target. ";
@@ -115,16 +141,12 @@ namespace WpfApp1
                         status_label.Foreground = Brushes.Green;
                         status_label.Content = "Active";
 
-                        //starts the timer, if user picks new target timer does not reset
+                        // Starts the timer, if user picks new target timer does not reset
                         if (!(stopwatch.Elapsed.Seconds > 0))
                             stopwatch.Start();
                        // stopwatch.Stop();
                         timer_label.Content = stopwatch.Elapsed;
 
-                    }
-                    else
-                    {
-                        isSearching = true;
                     }
                 }
                 catch (Exception ex)
@@ -136,26 +158,43 @@ namespace WpfApp1
                     status_label.Content = "Inactive";
                 }
                 
-            }            
+            }          
+            else
+            {
+
+            }
         }
 
+        // Sends signal to drone for the search to cease.
         private void Stop_Button1_Click(object sender, RoutedEventArgs e)
         {
             isSearching = false;
             
-            //reset images
+            // Reset ImageBox images.
             search_for_image.Source = null;
             person_found.Source = null;
 
+            // Sets ouput log to respective color and text.
             status_box.Foreground = Brushes.Red;
             status_box.Content= "Drone Stopped. ";
 
+            // Sets Drone Activity Label to respective color and status.
             status_label.Foreground = Brushes.Red;
             status_label.Content = "Inactive";
 
-           // RetrieveImage();
+            // RetrieveImage();
+
+            try
+            {
+                // comms.SendStop();
+            }
+            catch
+            {
+                Console.Write("");
+            }
         }
 
+        // Sends signal for drone to continue it's search and find a new target.
         private void Continue_Searching_Click(object sender, RoutedEventArgs e)
         {
             //TODO - make drone continue searching
@@ -164,49 +203,28 @@ namespace WpfApp1
             status_box.Content = "continuing Search. ";
         }
 
-        //private static UI_Network comms = new UI_Network();
-
-        //TODO integrate & remove
-        private void Start_Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-              //  comms.SendStart();
-            }
-           catch
-            {
-               
-            }
-        }
-        //TODO integrate & remove
-        private void Stop_Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-              // comms.SendStop();
-            }
-            catch
-            {
-                Console.Write("");
-            }
-        }
-
-        //forces the drone to stop
+        // Forces the drone to stop.
         private void KillSwitch_Click(object sender, RoutedEventArgs e)
         {
            //  comms.SendKill();
+
+            
         }
 
+        // Gathers weather information from dedicated server, then displays to UI
+        // if it is safe to use the drone outside.
         void Safe_to_Fly()
         {
-            bool connect = true;
-            string data = "";
-            int value;
+            var connect = true;
+            var data = "";
+            var value = 0;
 
+            // Defaults displayed text to black.
             safe_to_fly_status.Foreground = Brushes.Black;
 
             XmlDocument pullWeather = new XmlDocument();
 
+            // Attempts to gather current weather information.
             try
             {
                 pullWeather.Load("http://api.openweathermap.org/data/2.5/weather?zip=03060,us&mode=xml&appid=f95d4be882833be32b011342f0b6abc5");
@@ -224,8 +242,10 @@ namespace WpfApp1
                 safe_to_fly_status.Content = "Unknown";
             }
 
+            // Converts gathered data to a int.
             Int32.TryParse(data, out value);
 
+            // Determines safety level by determining if value is above or below 800.
             if (value / 100 == 8)
             {
                 safe_to_fly_status.Foreground = Brushes.Green;
@@ -236,23 +256,26 @@ namespace WpfApp1
                 safe_to_fly_status.Foreground = Brushes.Red;
                 safe_to_fly_status.Content = "Not Safe";
             }
-            /*codes => http://openweathermap.org/weather-conditions */
+            // Weather condition codes.
+            // http://openweathermap.org/weather-conditions
 
 
         }
 
+        // When drone finds target, function sets ImageBox to UI.
         void RetrieveImage()
         {
-            UI_Network Network = new UI_Network();
+            var Network = new UI_Network();
 
             myImage = "/*set to the incoming image**/";
 
             person_found.Source = setImage();
         }
 
+        // Returns a usable image converted from OpenFileDialog sourcestream.
         BitmapImage setImage()
         {
-            BitmapImage b = new BitmapImage();
+            var b = new BitmapImage();
             b.BeginInit();
             b.UriSource = new Uri(myImage);
             b.EndInit();

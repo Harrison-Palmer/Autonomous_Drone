@@ -23,6 +23,7 @@ namespace WpfApp1
     {
         public BackgroundWorker bw = new BackgroundWorker();
 
+        // Constructor, Initializes thread.
         public login()
         {
             InitializeComponent();
@@ -33,21 +34,25 @@ namespace WpfApp1
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             String userName = txtBxuserName.Text.ToLower();
             string pass = passBxPassword.Password;
+
+            // Hides "Forgot password?", and shows "loading ...".
             lblfrgtPass.Visibility = Visibility.Hidden;
             lblLoading.Visibility = Visibility.Visible;
+
+            // Enables hourglass cursor while calidating credentials.
             Mouse.OverrideCursor = Cursors.Wait;
+
+            // Disables the username, password, and login button 
+            // while validating already entered credentials.
             txtBxuserName.IsEnabled = false;
             passBxPassword.IsEnabled = false;
             btnLogin.IsEnabled = false; 
+
+            // Validates user credentials.
             if (userName == "admin" && pass == "admin")
             {
                 if (bw.IsBusy == false)
@@ -56,7 +61,8 @@ namespace WpfApp1
                 }                
             }
             else
-            {                             
+            {
+                // Hides "Forgot password?", and shows "loading ...".
                 lblLoading.Visibility = Visibility.Hidden;
                 lblfrgtPass.Visibility = Visibility.Visible;
                 lblfrgtPass.Content = "Forgot Password ?";
