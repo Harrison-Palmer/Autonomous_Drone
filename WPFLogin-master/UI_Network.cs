@@ -85,6 +85,7 @@ namespace WpfApp1
 
             LOGFILE.WriteLine(">> CLIENT CONNECTED: UI " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
 
+            ImageCounter = 0;
 
             while (true)
             {
@@ -107,8 +108,9 @@ namespace WpfApp1
                         bytesRead = UI_STREAM.Read(buffer, 0, UI_CLIENT.ReceiveBufferSize);
                         string filename = Encoding.ASCII.GetString(buffer, 0, bytesRead); // Get Filename
                         LOGFILE.WriteLine(">> Received: \"" + filename + "\" FROM SERVER " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
-                        // TODO: DO FTP STUFF TO GET <filename> OFF OF SERVER
-
+                        FTPImageTransfer ftp = new FTPImageTransfer("ftp://192.168.168.1", "Drone", "NEVERAGAIN");
+                        CurrentTimeStamp = DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff");
+                        ftp.Download(filename, "PERSON.jpg");
                         break;
 
                     default:
@@ -120,6 +122,8 @@ namespace WpfApp1
             }
         });
 
+        private static String CurrentTimeStamp { get; set; }
+        private static int ImageCounter { get; set; }
         private static int UI_PORT { get; set; }
         private static string LOCAL_IP { get; set; }
         private static StreamWriter LOGFILE { get; set; }

@@ -124,13 +124,13 @@ namespace WpfApp1
             RetrieveImage();
         }
 
-        //private static UI_Network comms = new UI_Network();
+        private static UI_Network comms = new UI_Network();
 
         private void Start_Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-              //  comms.SendStart();
+                comms.SendStart();
             }
            catch
             {
@@ -142,7 +142,7 @@ namespace WpfApp1
         {
             try
             {
-              // comms.SendStop();
+               comms.SendStop();
             }
             catch
             {
@@ -153,7 +153,7 @@ namespace WpfApp1
         //forces the drone to stop
         private void KillSwitch_Click(object sender, RoutedEventArgs e)
         {
-           //  comms.SendKill();
+             comms.SendKill();
         }
         
         //disables the drone buttons if there is no person being searched for yet
@@ -177,8 +177,6 @@ namespace WpfApp1
 
         void RetrieveImage()
         {
-            UI_Network Network = new UI_Network();
-
             myImage = "/*set to the incoming image**/";
 
             person_found.Source = setImage();
