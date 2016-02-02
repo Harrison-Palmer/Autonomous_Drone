@@ -240,7 +240,7 @@ namespace WpfApp1
 
                 safe_to_fly_status.Foreground = Brushes.Black;
                 safe_to_fly_status.Content = "Unknown";
-            }
+            } 
 
             // Converts gathered data to a int.
             Int32.TryParse(data, out value);
