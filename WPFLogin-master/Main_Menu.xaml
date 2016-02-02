@@ -114,6 +114,8 @@
                 <ImageBrush ImageSource="flower.jpg" Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
+        <Button x:Name="Start_Button" Content="Start Drone" HorizontalAlignment="Left" Margin="-797.852,484.99,0,-576.886" Width="170.221" FontSize="24" FontFamily="Verdana" Background="#FF5BB205" RenderTransformOrigin="0.528,-0.293" Click="Start_Button_Click"/>
+        <Button x:Name="Stop_Button" Content="Stop Drone" HorizontalAlignment="Left" Height="113.623" Margin="-797.852,603.613,0,-695.509" VerticalAlignment="Top" Width="170.221" Background="Red" FontFamily="Verdana" FontSize="24" RenderTransformOrigin="0.52,0.526" Click="Stop_Button_Click"/>
 
         <!--popup for logging out-->
         <!--
@@ -141,22 +143,22 @@
         <!--Start search button-->
         <Button x:Name="Start_Search" Style="{StaticResource SearchStyle}" Content="Start Search" Margin="-1241.634,0,0,-429.634" Width="220.241" Height="48.271" Background="White" Foreground="White" BorderBrush="White" OpacityMask="White" Click="Start_Search_Click" Cursor="Hand" HorizontalAlignment="Left" BorderThickness="0" VerticalAlignment="Bottom" FontSize="21.333"/>
         <!--continue search button-->
-        <Button x:Name="Continue_Searching" Style="{StaticResource SearchStyle}" Content="Continue Searching" Margin="-841.102,403.09,623.502,-429.634" Background="#FF38383C" Foreground="White" BorderBrush="White" Cursor="Hand" BorderThickness="0" Width="220.241" Visibility="Visible" FontSize="21.333" Click="Continue_Searching_Click"/>
+        <Button x:Name="Continue_Searching" Style="{StaticResource SearchStyle}" Content="Continue Searching" Margin="-841.102,403.09,623.502,-429.634" Background="#FF38383C" Foreground="#FFD10707" BorderBrush="#FF4971C7" Cursor="Hand" BorderThickness="0" Width="220.241" Visibility="Hidden"/>
         <Button x:Name="Stop_Button1" Style="{StaticResource SearchStyle}" Content="Stop" Margin="-1012.264,0,0,-429.634" Width="162.033" Height="48.271" Background="White" Foreground="White" BorderBrush="White" OpacityMask="White" Cursor="Hand" Click="Stop_Button1_Click" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="21.333" />
 
         <Rectangle Fill="#FF7B7B85" HorizontalAlignment="Left" Height="239.217" Margin="-1241.634,0,0,-700.009" Stroke="#FFA20606" VerticalAlignment="Bottom" Width="443.782"/>
-        <Label x:Name="battery_Label" Content="Battery %:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="172.029" FontFamily="Verdana" FontSize="26.667"/>
-        <Label x:Name="flying_status_Label" Content="Drone Status:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="196.042" FontFamily="Verdana" FontSize="26.667"/>
+        <Label x:Name="battery_Label" Content="Battery %:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="152.029" FontFamily="Verdana" FontSize="26.667"/>
+        <Label x:Name="flying_status_Label" Content="Flying Status:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="196.042" FontFamily="Verdana" FontSize="26.667"/>
         <Label x:Name="last_found_Label" Content="Last Found:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-653.714" VerticalAlignment="Bottom" Height="41.68" Width="172.029" FontFamily="Verdana" FontSize="26.667"/>
-        <Label x:Name="flight_time_Label" Content="Active Time:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-560.354" VerticalAlignment="Bottom" Height="41.68" Width="230.037" FontFamily="Verdana" FontSize="26.667"/>
-        <Label x:Name="percent_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
-        <Label x:Name="timer_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-565.354" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
-        <Label x:Name="status_label" Content="Inactive" HorizontalAlignment="Left" Margin="-918.912,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="121.06" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right" Foreground="Red"/>
-        <Label x:Name="found_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-648.714" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
+        <Label x:Name="flight_time_Label" Content="Flight Time Left:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-560.354" VerticalAlignment="Bottom" Height="41.68" Width="230.037" FontFamily="Verdana" FontSize="26.667"/>
+        <Label x:Name="percent_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
+        <Label x:Name="time_left_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-565.354" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
+        <Label x:Name="status_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
+        <Label x:Name="found_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-648.714" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
         <Image x:Name="person_found" HorizontalAlignment="Left" Height="293.743" Margin="-931.247,0,0,-337.687" VerticalAlignment="Bottom" Width="310.386"/>
         <Image x:Name="search_for_image" HorizontalAlignment="Left" Height="293.743" Margin="-1241.634,0,0,-337.687" VerticalAlignment="Bottom" Width="310.387" Stretch="UniformToFill"/>
-        <Label x:Name="status_box" Content="" HorizontalAlignment="Left" Margin="-1234.969,0,0,-459.395" VerticalAlignment="Bottom" Width="384.738" FontSize="16"/>
+        <Label x:Name="Upload_status" Content="" HorizontalAlignment="Left" Margin="-1234.969,0,0,-459.395" VerticalAlignment="Bottom" Width="220.241" FontSize="16"/>
         <Label x:Name="last_found_Label_Copy" Content="Safe To Fly:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-695.394" VerticalAlignment="Bottom" Height="41.68" Width="172.029" FontFamily="Verdana" FontSize="26.667"/>
-        <Label x:Name="safe_to_fly_status" Content="N/A" HorizontalAlignment="Left" Margin="-1050.393,0,0,-690.394" VerticalAlignment="Bottom" Height="41.68" Width="252.541" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
+        <Label x:Name="found_label_Copy" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-690.394" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>

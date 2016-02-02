@@ -13,8 +13,8 @@
         WindowStartupLocation="CenterScreen">
     <Grid Height="171" Width="359">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="18"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="18*"/>
+            <ColumnDefinition Width="341*"/>
         </Grid.ColumnDefinitions>
         <Image Source="/WpfApp1;component/Images/bImage.png" Stretch="UniformToFill" Grid.ColumnSpan="2" />
         <Label HorizontalAlignment="Left" Margin="-8.4,32,0,39" Name="label1" Width="100" FontFamily="FontAwesome" Content="" FontSize="16" FontStretch="Condensed" Grid.Column="1" />
