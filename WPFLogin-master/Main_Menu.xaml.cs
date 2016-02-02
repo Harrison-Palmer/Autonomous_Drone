@@ -17,6 +17,10 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows;
 
 //using System.Windows.Forms;
 
@@ -27,14 +31,16 @@ namespace WpfApp1
     /// </summary>
     /// 
 
-
     public partial class Main_Menu : Window
     {
+
+        private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
         Stopwatch stopwatch = new Stopwatch();
 
         bool isSearching = false;
         string myImage = "";
+
         //(put in every function that uses it) 
         //private static UI_Network comms = new UI_Network();
 
@@ -44,6 +50,11 @@ namespace WpfApp1
             InitializeComponent();
             Safe_to_Fly();
         }
+
+        backgroundWorker.WorkerReportsProgress = true;
+        backgroundWorker.ProgressChanged += ProgressChanged;
+        backgroundWorker.DoWork += backgroundWorker_DoWork;
+        backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
 
         // Returns to the main menu page.
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -145,7 +156,7 @@ namespace WpfApp1
                         if (!(stopwatch.Elapsed.Seconds > 0))
                             stopwatch.Start();
                         // stopwatch.Stop();
-                        timer_label.Content = stopwatch.Elapsed;
+                        //timer_label.Content = stopwatch.Elapsed;
 
                     }
                 }

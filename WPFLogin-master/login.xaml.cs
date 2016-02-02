@@ -115,6 +115,7 @@ namespace WpfApp1
             }
         }
 
+        // Currently unneeded
         private void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             
