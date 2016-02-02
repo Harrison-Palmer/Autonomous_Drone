@@ -21,6 +21,7 @@ namespace WpfApp1
     /// </summary>
     public partial class login : Window
     {
+        // Creates Thread.
         public BackgroundWorker bw = new BackgroundWorker();
 
         // Constructor, Initializes thread.
@@ -31,7 +32,7 @@ namespace WpfApp1
             bw.WorkerSupportsCancellation = true;
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
             bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted); 
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -62,19 +63,24 @@ namespace WpfApp1
             }
             else
             {
-                // Hides "Forgot password?", and shows "loading ...".
+                // Hides "loading ...", and shows "Forgot password?".
                 lblLoading.Visibility = Visibility.Hidden;
                 lblfrgtPass.Visibility = Visibility.Visible;
                 lblfrgtPass.Content = "Forgot Password ?";
+
+                // Re-enables username and password fields and sets them to red.
                 txtBxuserName.IsEnabled = true;
                 txtBxuserName.BorderBrush = Brushes.Red;
                 passBxPassword.IsEnabled = true;
                 passBxPassword.BorderBrush = Brushes.Red;
                 btnLogin.IsEnabled = true;
+
+                // Disables hourglass cursor.
                 Mouse.OverrideCursor = null;
             }
         }
 
+        // Has the window wait after entering credentials.
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
             //Thread.Sleep(2000);
@@ -114,39 +120,40 @@ namespace WpfApp1
             
         }
 
-        //exit button closes window
+        // Exit button closes window
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
         }
 
-        //Lets the window be dragged
+        // Lets the window be dragged.
         private void Window_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
 
-        //returns border to white if text has changed after incorrectly entering username
+        // Returns border to white if text has changed after incorrectly entering username
         private void txtBxuserName_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtBxuserName.BorderBrush = Brushes.White;            
         }
 
-        //returns border to white if text has changed after incorrectly entering password
+        // Returns border to white if text has changed 
+        // after incorrectly entering password
         private void passBxPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             passBxPassword.BorderBrush = Brushes.White;
         }
 
-        //If enter is pressed moves to password field
+        // If enter is pressed moves to password field.
         private void txtBxuserName_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Enter))
                 txtBxuserName.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
 
-        //If enter is pressed moves to button
+        // If enter is pressed moves to button.
         private void passBxPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.Enter))
