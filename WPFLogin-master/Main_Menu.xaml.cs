@@ -14,6 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Threading;
+using System.Windows.Controls;
+using System.Windows;
 
 
 
@@ -24,9 +28,13 @@ namespace WpfApp1
     /// </summary>
     /// 
 
-
+        
     public partial class Main_Menu : Window
     {
+       
+
+        private BackgroundWorker backgroundWorker = new BackgroundWorker();
+
 
         bool isSearching = false;
         string myImage = "C:\\Users\\hpalmer\\Source\\Repos\\Drone_ui\\WPFLogin-master\\user-1-glyph-icon_MkuBPp8O.png";
@@ -34,12 +42,53 @@ namespace WpfApp1
         public Main_Menu()
         {
             InitializeComponent();
-        }      
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.ProgressChanged += ProgressChanged;
+            backgroundWorker.DoWork += backgroundWorker_DoWork;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+
+        }
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+           
+            for (int i = 0; i <= 101; i++)
+            {
+                //transfer.Upload(openFileDialog.FileName, name);
+            
+                Thread.Sleep(100); // Just a test
+                backgroundWorker.ReportProgress(i);
+
+
+            }
+            
+
+        }
+
+       private void ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+         for (int i = 0; i <= theprogressbar.Value; i++)
+            {
+                percentageprogress.Content = i + " %";
+
+            }
+
+            theprogressbar.Value = e.ProgressPercentage;
+            
+
+        }
 
     private void Home_Click(object sender, RoutedEventArgs e)
         {
             //NavigationService.Navigate(new Uri("test.xaml", UriKind.Relative));
         }
+
+    private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+            //update ui once worker complete his work
+                MessageBox.Show("Image has been uploaded");
+          
+    }
 
         //mouse hover - home
         private void Home_MouseEnter(object sender, MouseEventArgs e)
@@ -58,6 +107,7 @@ namespace WpfApp1
         //
         private void Start_Search_Click(object sender, RoutedEventArgs e)
         {
+           
             FTPImageTransfer transfer = null;
             if (!isSearching)
             {
@@ -89,6 +139,10 @@ namespace WpfApp1
                     myImage = openFileDialog.FileName;
 
                    // transfer.Upload(openFileDialog.FileName, name);
+                   
+
+
+
                     //comms.SendImage(name);
 
                     //sets imagebox with image
@@ -129,7 +183,7 @@ namespace WpfApp1
                         
                     }
 
-   
+ 
 
                 
                 }
@@ -177,7 +231,7 @@ namespace WpfApp1
 
         private void Stop_Button1_Click(object sender, RoutedEventArgs e) // Button controlling Network
         {
-
+            backgroundWorker.RunWorkerAsync();
             isSearching = false;
 
             //RetrieveImage();
@@ -232,5 +286,7 @@ namespace WpfApp1
             else
                 Start_Button.IsEnabled = true;
         }
+
+    
     }
 }

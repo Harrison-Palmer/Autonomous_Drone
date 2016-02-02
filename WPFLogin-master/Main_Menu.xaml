@@ -157,5 +157,8 @@
         <Label x:Name="found_label" Content="N/A" HorizontalAlignment="Left" Margin="-876.922,0,0,-648.714" VerticalAlignment="Bottom" Height="41.68" Width="79.07" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Center"/>
         <Image x:Name="person_found" HorizontalAlignment="Left" Height="293.743" Margin="-931.247,0,0,-337.687" VerticalAlignment="Bottom" Width="310.386"/>
         <Image x:Name="search_for_image" HorizontalAlignment="Left" Height="293.743" Margin="-1241.634,0,0,-337.687" VerticalAlignment="Bottom" Width="310.387" Stretch="UniformToFill"/>
+        <Label x:Name="ImageProgress" Content="Image Uploaded" HorizontalAlignment="Left" Height="33" Margin="-436,66,0,-77.273" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.338,0.529"/>
+        <ProgressBar x:Name="theprogressbar" HorizontalAlignment="Left" Height="16" Margin="-436,104,0,-98.273" VerticalAlignment="Top" Width="150"/>
+        <Label x:Name="percentageprogress" Content="0%&#xD;&#xA;" HorizontalAlignment="Left" Height="98" Margin="-495,96,0,-172.273" VerticalAlignment="Top" Foreground="White" FontSize="17.333"/>
     </Grid>
 </Window>
