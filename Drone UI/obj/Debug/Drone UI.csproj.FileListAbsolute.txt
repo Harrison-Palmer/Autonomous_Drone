@@ -23,3 +23,4 @@ C:\Users\hpalmer.LRC\Documents\GitHub\Drone_ui\Drone UI\obj\Debug\Drone UI_Marku
 C:\Users\hpalmer.LRC\Documents\GitHub\Drone_ui\Drone UI\obj\Debug\Drone UI_MarkupCompile.lref
 C:\Users\hpalmer.LRC\Source\Repos\Drone_ui\Drone UI\bin\Debug\Drone UI.exe.config
 C:\Users\CoffeeRoll\Desktop\Drone_ui\Drone UI\bin\Debug\Drone UI.exe.config
+C:\Users\hpalmer\Source\Repos\Drone_ui\Drone UI\bin\Debug\Drone UI.exe.config

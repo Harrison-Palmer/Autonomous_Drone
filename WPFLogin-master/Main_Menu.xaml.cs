@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,6 +20,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows;
+using System.Net;
 
 //using System.Windows.Forms;
 
@@ -34,7 +34,7 @@ namespace WpfApp1
     public partial class Main_Menu : Window
     {
 
-        private BackgroundWorker backgroundWorker = new BackgroundWorker();
+      //////  private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
         Stopwatch stopwatch = new Stopwatch();
 
@@ -49,12 +49,42 @@ namespace WpfApp1
         {
             InitializeComponent();
             Safe_to_Fly();
+            // Network_initialize();
+            ThreadedWorker.
+            
         }
 
-        backgroundWorker.WorkerReportsProgress = true;
-        backgroundWorker.ProgressChanged += ProgressChanged;
-        backgroundWorker.DoWork += backgroundWorker_DoWork;
-        backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+        public partial class ThreadedWorker : Main_Menu
+        {
+            int ID;
+            Thread t;
+
+            public ThreadedWorker(int ID)
+            {
+                this.ID = ID;
+                t = new Thread(new ThreadStart(Network_initialize));
+                t.Start();
+            }
+
+            void Network_initialize()
+            {
+                try
+                {
+                    status_box.Foreground = Brushes.Yellow;
+                    status_box.Content = "Attempting to Connect to Server... ";
+                    UI_Network Comm = new UI_Network();
+
+                }
+                catch (Exception ex)
+                {
+                    status_box.Foreground = Brushes.Red;
+                    status_box.Content = "Could not Connect to the Server. ";
+                    throw ex;
+                }
+                status_box.Foreground = Brushes.Green;
+                status_box.Content = "Connection Successful! ";
+            }
+        }
 
         // Returns to the main menu page.
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -251,7 +281,7 @@ namespace WpfApp1
 
                 safe_to_fly_status.Foreground = Brushes.Black;
                 safe_to_fly_status.Content = "Unknown";
-            } 
+            }
 
             // Converts gathered data to a int.
             Int32.TryParse(data, out value);
@@ -292,6 +322,5 @@ namespace WpfApp1
             b.EndInit();
             return b;
         }
-
     }
 }
