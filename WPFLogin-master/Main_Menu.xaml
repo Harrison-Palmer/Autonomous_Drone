@@ -155,7 +155,7 @@
         <Label x:Name="found_label" Content="N/A" HorizontalAlignment="Left" Margin="-975.915,0,0,-648.714" VerticalAlignment="Bottom" Height="41.68" Width="178.063" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
         <Image x:Name="person_found" HorizontalAlignment="Left" Height="293.743" Margin="-931.247,0,0,-337.687" VerticalAlignment="Bottom" Width="310.386"/>
         <Image x:Name="search_for_image" HorizontalAlignment="Left" Height="293.743" Margin="-1241.634,0,0,-337.687" VerticalAlignment="Bottom" Width="310.387" Stretch="UniformToFill"/>
-        <Label x:Name="status_box" Content="" HorizontalAlignment="Left" Margin="-1234.969,0,0,-459.395" VerticalAlignment="Bottom" Width="220.241" FontSize="16"/>
+        <Label x:Name="status_box" Content="" HorizontalAlignment="Left" Margin="-1234.969,0,0,-459.395" VerticalAlignment="Bottom" Width="614.108" FontSize="16"/>
         <Label x:Name="last_found_Label_Copy" Content="Safe To Drive:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-695.394" VerticalAlignment="Bottom" Height="41.68" Width="206.029" FontFamily="Verdana" FontSize="26.667"/>
         <Label x:Name="safe_to_fly_status" Content="N/A" HorizontalAlignment="Left" Margin="-942.598,0,0,-690.394" VerticalAlignment="Bottom" Height="41.68" Width="144.746" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
         <Label x:Name="ImageProgress" Content="Image Uploaded" HorizontalAlignment="Left" Height="33" Margin="-436,66,0,-77.273" VerticalAlignment="Top" FontSize="18" FontWeight="Bold" Foreground="White" RenderTransformOrigin="0.338,0.529"/>

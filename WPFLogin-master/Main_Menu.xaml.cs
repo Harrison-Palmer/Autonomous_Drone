@@ -18,11 +18,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
-using System.Windows.Controls;
-using System.Windows;
 using System.Net;
-
-//using System.Windows.Forms;
 
 namespace WpfApp1
 {
@@ -33,9 +29,6 @@ namespace WpfApp1
 
     public partial class Main_Menu : Window
     {
-
-      //////  private BackgroundWorker backgroundWorker = new BackgroundWorker();
-
         Stopwatch stopwatch = new Stopwatch();
 
         bool isSearching = false;
@@ -48,12 +41,43 @@ namespace WpfApp1
         public Main_Menu()
         {
             InitializeComponent();
-            Safe_to_Fly();
-            // Network_initialize();
-            ThreadedWorker.
-            
+
+            // Initializes and starts the thread.
+            var th1 = new Thread(Threaded_Network);
+            //th1.IsBackground = true;
+            th1.Start();
+
+            var th2 = new Thread(Safe_to_Fly);
+            th2.Start();
         }
 
+        // Attemps to establish connection to server, if successful status box displays
+        // a successful connection message, otherwise states the connection failed
+        public void Threaded_Network()
+        {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                try
+                {
+                    status_box.Foreground = Brushes.Yellow;
+                    status_box.Content = "Attempting to Connect to Server... ";
+                    this.Dispatcher.Invoke((Action)(() =>
+                    {
+                      //  UI_Network Comm = new UI_Network(); //<--cannot get to work when disconnected
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    status_box.Foreground = Brushes.Red;
+                    status_box.Content = "Could not Connect to the Server. ";
+                    throw ex;
+                }
+                status_box.Foreground = Brushes.Green;
+                status_box.Content = "Connection Successful! ";
+            }));
+        }
+
+        // Threaded network connection.
         public partial class ThreadedWorker : Main_Menu
         {
             int ID;
@@ -174,7 +198,7 @@ namespace WpfApp1
 
                         // Sets Dialog box's color and text with respect to the image upload result
                         status_box.Foreground = Brushes.Green;
-                        if (Start_Search.Content == "New Search")
+                        if ((string)Start_Search.Content == "New Search")
                             status_box.Content = "Image succesfully uploaded, Searching for new target. ";
                         else
                             status_box.Content = "Image succesfully uploaded, Drone starting. ";
@@ -256,51 +280,53 @@ namespace WpfApp1
         // if it is safe to use the drone outside.
         void Safe_to_Fly()
         {
-            var connect = true;
-            var data = "";
-            var value = 0;
-
-            // Defaults displayed text to black.
-            safe_to_fly_status.Foreground = Brushes.Black;
-
-            XmlDocument pullWeather = new XmlDocument();
-
-            // Attempts to gather current weather information.
-            try
+            this.Dispatcher.Invoke((Action)(() =>
             {
-                pullWeather.Load("http://api.openweathermap.org/data/2.5/weather?zip=03060,us&mode=xml&appid=f95d4be882833be32b011342f0b6abc5");
+                var connect = true;
+                var data = "";
+                var value = 0;
 
-                data = pullWeather.SelectSingleNode("/current/weather").Attributes[0].InnerText;
-            }
-            catch (Exception ex)
-            {
-                connect = false;
-
-                status_box.Foreground = Brushes.Red;
-                status_box.Content = "Failed to retrieve weather information. ";
-
+                // Defaults displayed text to black.
                 safe_to_fly_status.Foreground = Brushes.Black;
-                safe_to_fly_status.Content = "Unknown";
-            }
 
-            // Converts gathered data to a int.
-            Int32.TryParse(data, out value);
+                XmlDocument pullWeather = new XmlDocument();
 
-            // Determines safety level by determining if value is above or below 800.
-            if (value / 100 == 8)
-            {
-                safe_to_fly_status.Foreground = Brushes.Green;
-                safe_to_fly_status.Content = "Safe";
-            }
-            else if (connect != false)
-            {
-                safe_to_fly_status.Foreground = Brushes.Red;
-                safe_to_fly_status.Content = "Not Safe";
-            }
-            // Weather condition codes.
-            // http://openweathermap.org/weather-conditions
+                // Attempts to gather current weather information.
+                try
+                {
+                    pullWeather.Load("http://api.openweathermap.org/data/2.5/weather?zip=03060,us&mode=xml&appid=f95d4be882833be32b011342f0b6abc5");
 
+                    data = pullWeather.SelectSingleNode("/current/weather").Attributes[0].InnerText;
+                }
+                catch (Exception ex)
+                {
+                    connect = false;
 
+                    status_box.Foreground = Brushes.Red;
+                    status_box.Content = "Failed to retrieve weather information. ";
+
+                    safe_to_fly_status.Foreground = Brushes.Black;
+                    safe_to_fly_status.Content = "Unknown";
+                }
+
+                // Converts gathered data to a int.
+                Int32.TryParse(data, out value);
+
+                // Determines safety level by determining if value is above or below 800.
+                if (value / 100 == 8)
+                {
+                    safe_to_fly_status.Foreground = Brushes.Green;
+                    safe_to_fly_status.Content = "Safe";
+                }
+                else if (connect != false)
+                {
+                    safe_to_fly_status.Foreground = Brushes.Red;
+                    safe_to_fly_status.Content = "Not Safe";
+                }
+                // Weather condition codes.
+                // http://openweathermap.org/weather-conditions
+
+            }));
         }
 
         // When drone finds target, function sets ImageBox to UI.
