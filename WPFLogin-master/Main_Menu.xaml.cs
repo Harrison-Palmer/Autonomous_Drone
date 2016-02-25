@@ -19,6 +19,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
 using System.Net;
+using System.Net.Sockets;
 
 namespace WpfApp1
 {
@@ -63,17 +64,16 @@ namespace WpfApp1
                     status_box.Content = "Attempting to Connect to Server... ";
                     this.Dispatcher.Invoke((Action)(() =>
                     {
-                      //  UI_Network Comm = new UI_Network(); //<--cannot get to work when disconnected
+                        UI_Network Comm = new UI_Network();
                     }));
                 }
-                catch (Exception ex)
+                catch (SocketException ex)
                 {
                     status_box.Foreground = Brushes.Red;
                     status_box.Content = "Could not Connect to the Server. ";
-                    throw ex;
                 }
                 status_box.Foreground = Brushes.Green;
-                status_box.Content = "Connection Successful! ";
+               // status_box.Content = "Connection Successful! ";
             }));
         }
 
