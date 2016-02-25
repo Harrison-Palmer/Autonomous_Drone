@@ -31,9 +31,12 @@ namespace WpfApp1
     public partial class Main_Menu : Window
     {
         Stopwatch stopwatch = new Stopwatch();
+        private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
         bool isSearching = false;
         string myImage = "";
+
+      
 
         //(put in every function that uses it) 
         //private static UI_Network comms = new UI_Network();
@@ -43,6 +46,11 @@ namespace WpfApp1
         {
             InitializeComponent();
 
+            backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.ProgressChanged += ProgressChanged;
+            backgroundWorker.DoWork += backgroundWorker_DoWork;
+           
+
             // Initializes and starts the thread.
             var th1 = new Thread(Threaded_Network);
             //th1.IsBackground = true;
@@ -51,6 +59,19 @@ namespace WpfApp1
             var th2 = new Thread(Safe_to_Fly);
             th2.Start();
         }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+
+        }
+        private void ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+
+        }
+
+
 
         // Attemps to establish connection to server, if successful status box displays
         // a successful connection message, otherwise states the connection failed
