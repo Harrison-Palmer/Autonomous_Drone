@@ -32,6 +32,8 @@ namespace WpfApp1
     {
         Stopwatch stopwatch = new Stopwatch();
 
+        public delegate void NextPrimeDelegate();
+
         bool isSearching = false;
         string myImage = "";
 
@@ -56,16 +58,16 @@ namespace WpfApp1
         // a successful connection message, otherwise states the connection failed
         public void Threaded_Network()
         {
-            this.Dispatcher.Invoke((Action)(() =>
-            {
+          //  this.Dispatcher.Invoke((Action)(() =>
+          //  {
                 try
                 {
                     status_box.Foreground = Brushes.Yellow;
                     status_box.Content = "Attempting to Connect to Server... ";
-                    this.Dispatcher.Invoke((Action)(() =>
-                    {
+                   // this.Dispatcher.Invoke((Action)(() =>
+                   // {
                         UI_Network Comm = new UI_Network();
-                    }));
+                   // }));
                 }
                 catch (SocketException ex)
                 {
@@ -73,8 +75,8 @@ namespace WpfApp1
                     status_box.Content = "Could not Connect to the Server. ";
                 }
                 status_box.Foreground = Brushes.Green;
-               // status_box.Content = "Connection Successful! ";
-            }));
+                status_box.Content = "Connection Successful! ";
+            //   }));
         }
 
         // Threaded network connection.
