@@ -213,6 +213,16 @@ namespace WpfApp1
                         //timer_label.Content = stopwatch.Elapsed;
 
                     }
+                    else if (click_ok == false)
+                    {
+                        // Resets the upload fail/pass dialog box
+                        //status_box.Foreground = reset
+                        status_box.Content = " ";
+
+                        status_label.Foreground = Brushes.Black;
+                        status_label.Content = "N/A";
+
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -344,8 +354,16 @@ namespace WpfApp1
         {
             var b = new BitmapImage();
             b.BeginInit();
-            b.UriSource = new Uri(myImage);
-            b.EndInit();
+            try
+            {
+                b.UriSource = new Uri(myImage);
+                b.EndInit();
+                
+            }
+            catch
+            {
+
+            }
             return b;
         }
     }
