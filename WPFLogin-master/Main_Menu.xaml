@@ -146,9 +146,9 @@
 
         <Rectangle Fill="#FF7B7B85" HorizontalAlignment="Left" Height="239.217" Margin="-1241.634,0,0,-700.009" Stroke="#FFA20606" VerticalAlignment="Bottom" Width="443.782"/>
         <Label x:Name="battery_Label" Content="Battery %:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="152.029" FontFamily="Verdana" FontSize="26.667"/>
-        <Label x:Name="flying_status_Label" Content="Flying Status:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="196.042" FontFamily="Verdana" FontSize="26.667"/>
+        <Label x:Name="flying_status_Label" Content="Driving Status:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="196.042" FontFamily="Verdana" FontSize="26.667"/>
         <Label x:Name="last_found_Label" Content="Last Found:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-653.714" VerticalAlignment="Bottom" Height="41.68" Width="172.029" FontFamily="Verdana" FontSize="26.667"/>
-        <Label x:Name="flight_time_Label" Content="Flight Time Left:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-560.354" VerticalAlignment="Bottom" Height="41.68" Width="230.037" FontFamily="Verdana" FontSize="26.667"/>
+        <Label x:Name="flight_time_Label" Content="Drive Time Left:" HorizontalAlignment="Left" Margin="-1227.422,0,0,-560.354" VerticalAlignment="Bottom" Height="41.68" Width="230.037" FontFamily="Verdana" FontSize="26.667"/>
         <Label x:Name="percent_label" Content="N/A" HorizontalAlignment="Left" Margin="-931.247,0,0,-518.674" VerticalAlignment="Bottom" Height="41.68" Width="133.395" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
         <Label x:Name="time_left_label" Content="N/A" HorizontalAlignment="Left" Margin="-931.247,0,0,-565.354" VerticalAlignment="Bottom" Height="41.68" Width="133.395" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
         <Label x:Name="status_label" Content="N/A" HorizontalAlignment="Left" Margin="-975.915,0,0,-607.034" VerticalAlignment="Bottom" Height="41.68" Width="178.063" FontFamily="Verdana" FontSize="26.667" HorizontalContentAlignment="Right"/>
