@@ -31,7 +31,6 @@ namespace WpfApp1
     public partial class Main_Menu : Window
     {
         Stopwatch stopwatch = new Stopwatch();
-        private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
         public delegate void NextPrimeDelegate();
 
@@ -48,58 +47,58 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            backgroundWorker.WorkerReportsProgress = true;
-            backgroundWorker.ProgressChanged += ProgressChanged;
-            backgroundWorker.DoWork += backgroundWorker_DoWork;
-           
-
             // Initializes and starts the thread.
             var th1 = new Thread(Threaded_Network);
             //th1.IsBackground = true;
             th1.Start();
 
-            var th2 = new Thread(Safe_to_Fly);
-            th2.Start();
+           // var th2 = new Thread(Safe_to_Fly);
+           // th2.Start();
         }
-
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-
-
-        }
-        private void ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
-
-        }
-
-
 
         // Attemps to establish connection to server, if successful status box displays
         // a successful connection message, otherwise states the connection failed
         public void Threaded_Network()
         {
-          //  this.Dispatcher.Invoke((Action)(() =>
-          //  {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
                 try
                 {
                     status_box.Foreground = Brushes.Yellow;
                     status_box.Content = "Attempting to Connect to Server... ";
-                   // this.Dispatcher.Invoke((Action)(() =>
-                   // {
-                        UI_Network Comm = new UI_Network();
-                   // }));
+
+                   this.Dispatcher.Invoke((Action)(() =>
+                    {
+                       UI_Network Comms = new UI_Network();
+
+                
+                    }));
                 }
-                catch (SocketException ex)
+                catch (TimeoutException ex)
                 {
                     status_box.Foreground = Brushes.Red;
                     status_box.Content = "Could not Connect to the Server. ";
                 }
-                status_box.Foreground = Brushes.Green;
-                status_box.Content = "Connection Successful! ";
-            //   }));
-        }
 
+                //status_box.Foreground = Brushes.Green;
+                // status_box.Content = "Connection Successful! ";
+
+                /*
+                try
+                {
+                    UI_Network Comm = new UI_Network();
+                    status_box.Content = Comm.GetVoltage();
+                }
+                catch(TimeoutException ex)
+                {
+                    status_box.Content = ex;
+                }
+                */
+                
+          }));
+       }
+
+        /*
         // Threaded network connection.
         public partial class ThreadedWorker : Main_Menu
         {
@@ -132,6 +131,7 @@ namespace WpfApp1
                 status_box.Content = "Connection Successful! ";
             }
         }
+        */
 
         // Returns to the main menu page.
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -211,12 +211,14 @@ namespace WpfApp1
 
                         try
                         {
-                            //comms.SendImage(name);
-                            //  comms.SendStart();
-                        }
-                        catch
-                        {
+                            UI_Network Comms = new UI_Network();
 
+                            Comms.SendImage(name);
+                            Comms.SendStart();
+                        }
+                        catch (TimeoutException ex)
+                        {
+                            status_box.Content = ex;
                         }
 
                         // Sets Dialog box's color and text with respect to the image upload result
@@ -229,11 +231,13 @@ namespace WpfApp1
                         status_label.Foreground = Brushes.Green;
                         status_label.Content = "Active";
 
+                        /* needs to be added
                         // Starts the timer, if user picks new target timer does not reset
                         if (!(stopwatch.Elapsed.Seconds > 0))
                             stopwatch.Start();
                         // stopwatch.Stop();
                         //timer_label.Content = stopwatch.Elapsed;
+                        */
 
                     }
                     else if (click_ok == false)
@@ -311,7 +315,7 @@ namespace WpfApp1
 
         // Gathers weather information from dedicated server, then displays to UI
         // if it is safe to use the drone outside.
-        void Safe_to_Fly()
+        /*void Safe_to_Fly()
         {
             this.Dispatcher.Invoke((Action)(() =>
             {
@@ -361,6 +365,7 @@ namespace WpfApp1
 
             }));
         }
+        */
 
         // When drone finds target, function sets ImageBox to UI.
         void RetrieveImage()
