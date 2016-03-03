@@ -149,7 +149,7 @@ namespace WpfApp1
                         // Starts the timer, if user picks new target timer does not reset
                         if (!(stopwatch.Elapsed.Seconds > 0))
                             stopwatch.Start();
-                        // stopwatch.Stop(); 
+                        // stopwatch.Stop();
                         //timer_label.Content = stopwatch.Elapsed;
 
                     }
