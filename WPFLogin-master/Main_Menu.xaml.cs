@@ -31,7 +31,6 @@ namespace WpfApp1
     public partial class Main_Menu : Window
     {
         Stopwatch stopwatch = new Stopwatch();
-        private BackgroundWorker backgroundWorker = new BackgroundWorker();
 
         public delegate void NextPrimeDelegate();
 
@@ -48,58 +47,189 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            backgroundWorker.WorkerReportsProgress = true;
-            backgroundWorker.ProgressChanged += ProgressChanged;
-            backgroundWorker.DoWork += backgroundWorker_DoWork;
-           
-
             // Initializes and starts the thread.
             var th1 = new Thread(Threaded_Network);
             //th1.IsBackground = true;
             th1.Start();
 
-            var th2 = new Thread(Safe_to_Fly);
-            th2.Start();
+           // var th2 = new Thread(Safe_to_Fly);
+           // th2.Start();
         }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        // Attemps to establish connection to server, if successful status box displays
+        // a successful connection message, otherwise states the connection failed
+        public void Threaded_Network()
         {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
+                try
+                {
+                    status_box.Foreground = Brushes.Yellow;
+                    status_box.Content = "Attempting to Connect to Server... ";
 
+            FTPImageTransfer transfer = null;
+            // Begins the drone search process by having the user select a image of
+            // the target.
+            if (!isSearching)
+            {
+               
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    status_box.Foreground = Brushes.Yellow;
+                    status_box.Content = "User Selecting target. ";
 
+                    status_label.Foreground = Brushes.Yellow;
+                    status_label.Content = "Standby";
+                }));
+
+                // Makes filepicker window object.
+                var openFileDialog = new OpenFileDialog();
+                // Only allows Images.
+                openFileDialog.Filter = "Image Files (*.png, *.jpg,*.bmp)|*.png;*.jpg;*.bmp";
+                openFileDialog.FilterIndex = 1;
+                // Sets default directory when opening.
+                openFileDialog.InitialDirectory = @"C:\";
+                // Title of image picker window.
+                openFileDialog.Title = "Select Image of person to be searched for";
+
+                bool? click_ok = openFileDialog.ShowDialog();
+                this.Dispatcher.Invoke((Action)(() =>
+                {
+                    // Sets variable myImage to the uploaded image.
+                    myImage = openFileDialog.FileName;
+                    // Sets image box to the image path in myImage.
+                    search_for_image.Source = setImage();
+
+                }));
+
+            // Attempts to send user-selected image to server for drone search.
+            try
+                {
+                    if (click_ok == true)
+                    {
+                        // Makes a new FTP connection to the server.
+                        transfer = new FTPImageTransfer("ftp://192.168.168.1", "drone", "NEVERAGAIN");
+                        // Uses DateTime.Now.ToString();.
+                        var data = "";
+                        // Uploads image with name of ui_Image and the date.
+                        var name = "ui_image" + data + ".png";
+
+                        // Sends image file to server.
+                        if (isSearching == true)
+                        {
+                            for (int i = 0; i <= 101; i++)
+                            {
+                                 transfer.Upload(openFileDialog.FileName, name);
+                                //Reports the progress of the upload.
+                                // Thread.Sleep(100); Testing the upload button
+                                backgroundWorker.ReportProgress(i);
+
+                            }
+                        }
+                        try
+                        {
+                            //comms.SendImage(name);
+                            //  comms.SendStart();
+                        }
+                        catch
+                        {
+
+                        }
+
+                        // Sets Dialog box's color and text with respect to the image upload result
+                        status_box.Foreground = Brushes.Green;
+                        if ((string)Start_Search.Content == "New Search")
+                            status_box.Content = "Image succesfully uploaded, Searching for new target. ";
+                        else
+                            status_box.Content = "Image succesfully uploaded, Drone starting. ";
+
+                        status_label.Foreground = Brushes.Green;
+                        status_label.Content = "Active";
+
+                        // Starts the timer, if user picks new target timer does not reset
+                        if (!(stopwatch.Elapsed.Seconds > 0))
+                            stopwatch.Start();
+                        // stopwatch.Stop();
+                        //timer_label.Content = stopwatch.Elapsed;
+
+                    }
+                    else if (click_ok == false)
+                    {
+                        // Resets the upload fail/pass dialog box
+                        //status_box.Foreground = reset
+
+                        this.Dispatcher.Invoke((Action)(() =>
+                        {
+                            status_box.Content = " ";
+
+                            status_label.Foreground = Brushes.Black;
+                            status_label.Content = "N/A";
+                        }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.Dispatcher.Invoke((Action)(() =>
+                    {
+                        status_box.Foreground = Brushes.Red;
+                        status_box.Content = "Image failed to upload, Drone not started. ";
+
+                        status_label.Foreground = Brushes.Red;
+                        status_label.Content = "Inactive";
+                    }));
+                }
+
+            }
+            else
+            {
+
+            }
+
+           
         }
         private void ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            for (int i = 0; i <= theprogressbar.Value; i++)
+            {
+                percentageprogress.Content = i + " %";
+
+            }
+
+            theprogressbar.Value = e.ProgressPercentage;
 
 
         }
+                catch (TimeoutException ex)
+                {
+                    status_box.Foreground = Brushes.Red;
+                    status_box.Content = "Could not Connect to the Server. ";
+                }
 
+                //status_box.Foreground = Brushes.Green;
+                // status_box.Content = "Connection Successful! ";
 
 
         // Attemps to establish connection to server, if successful status box displays
         // a successful connection message, otherwise states the connection failed
         public void Threaded_Network()
         {
-          //  this.Dispatcher.Invoke((Action)(() =>
-          //  {
+            this.Dispatcher.Invoke((Action)(() =>
+            {
                 try
                 {
-                    status_box.Foreground = Brushes.Yellow;
-                    status_box.Content = "Attempting to Connect to Server... ";
-                   // this.Dispatcher.Invoke((Action)(() =>
-                   // {
                         UI_Network Comm = new UI_Network();
-                   // }));
+                    status_box.Content = Comm.GetVoltage();
                 }
-                catch (SocketException ex)
+                catch(TimeoutException ex)
                 {
-                    status_box.Foreground = Brushes.Red;
-                    status_box.Content = "Could not Connect to the Server. ";
+                    status_box.Content = ex;
                 }
                 status_box.Foreground = Brushes.Green;
                 status_box.Content = "Connection Successful! ";
-            //   }));
+               }));
         }
 
+        /*
         // Threaded network connection.
         public partial class ThreadedWorker : Main_Menu
         {
@@ -132,6 +262,7 @@ namespace WpfApp1
                 status_box.Content = "Connection Successful! ";
             }
         }
+        */
 
         // Returns to the main menu page.
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -161,40 +292,11 @@ namespace WpfApp1
         private void Start_Search_Click(object sender, RoutedEventArgs e)
         {
             // Resets the upload fail/pass dialog box
-            status_box.Foreground = Brushes.Yellow;
-            status_box.Content = "User Selecting target. ";
 
-            status_label.Foreground = Brushes.Yellow;
-            status_label.Content = "Standby";
-
-            FTPImageTransfer transfer = null;
-
-            // Begins the drone search process by having the user select a image of
-            // the target.
             if (!isSearching)
             {
-                // Shows continue searching button.
                 Continue_Searching.Visibility = Visibility.Visible;
                 Start_Search.Content = "New Search";
-
-                // Makes filepicker window object.
-                var openFileDialog = new OpenFileDialog();
-                // Only allows Images.
-                openFileDialog.Filter = "Image Files (*.png, *.jpg,*.bmp)|*.png;*.jpg;*.bmp";
-                openFileDialog.FilterIndex = 1;
-                // Sets default directory when opening.
-                openFileDialog.InitialDirectory = @"C:\";
-                // Title of image picker window.
-                openFileDialog.Title = "Select Image of person to be searched for";
-
-                bool? click_ok = openFileDialog.ShowDialog();
-
-                // Sets variable myImage to the uploaded image.
-                myImage = openFileDialog.FileName;
-                // Sets image box to the image path in myImage.
-                search_for_image.Source = setImage();
-
-                // Attemps to send user-selected image to server for drone search.
                 try
                 {
                     if (click_ok == true)
@@ -211,12 +313,14 @@ namespace WpfApp1
 
                         try
                         {
-                            //comms.SendImage(name);
-                            //  comms.SendStart();
-                        }
-                        catch
-                        {
+                            UI_Network Comms = new UI_Network();
 
+                            Comms.SendImage(name);
+                            Comms.SendStart();
+                        }
+                        catch (TimeoutException ex)
+                        {
+                            status_box.Content = ex;
                         }
 
                         // Sets Dialog box's color and text with respect to the image upload result
@@ -229,11 +333,13 @@ namespace WpfApp1
                         status_label.Foreground = Brushes.Green;
                         status_label.Content = "Active";
 
+                        /* needs to be added
                         // Starts the timer, if user picks new target timer does not reset
                         if (!(stopwatch.Elapsed.Seconds > 0))
                             stopwatch.Start();
                         // stopwatch.Stop();
                         //timer_label.Content = stopwatch.Elapsed;
+                        */
 
                     }
                     else if (click_ok == false)
@@ -252,16 +358,11 @@ namespace WpfApp1
                     status_box.Foreground = Brushes.Red;
                     status_box.Content = "Image failed to upload, Drone not started. ";
 
-                    status_label.Foreground = Brushes.Red;
-                    status_label.Content = "Inactive";
                 }
 
             }
-            else
-            {
 
             }
-        }
 
         // Sends signal to drone for the search to cease.
         private void Stop_Button1_Click(object sender, RoutedEventArgs e)
@@ -311,7 +412,7 @@ namespace WpfApp1
 
         // Gathers weather information from dedicated server, then displays to UI
         // if it is safe to use the drone outside.
-        void Safe_to_Fly()
+        /*void Safe_to_Fly()
         {
             this.Dispatcher.Invoke((Action)(() =>
             {
@@ -361,6 +462,7 @@ namespace WpfApp1
 
             }));
         }
+        */
 
         // When drone finds target, function sets ImageBox to UI.
         void RetrieveImage()
