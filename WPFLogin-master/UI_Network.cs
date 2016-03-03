@@ -9,7 +9,7 @@ namespace WpfApp1
 {
     class SocketConnection
     {
-
+         
         int iPort;
         String strHost;
         Socket connection;
