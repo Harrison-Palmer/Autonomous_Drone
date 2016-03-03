@@ -24,9 +24,9 @@ namespace WpfApp1
             try {
                 connection.Connect(strHost, iPort);
             }
-            catch
+            catch (Exception ex)
             {
-                Console.WriteLine("ERROR");
+                Console.WriteLine(ex.InnerException);
             }
         }
 
@@ -34,7 +34,7 @@ namespace WpfApp1
         {
             return new NetworkStream(connection);
         }
-
+        
     }
 
     class UI_Network
@@ -44,7 +44,7 @@ namespace WpfApp1
             UI_PORT = 18000;
 
             LOCAL_IP = "192.168.168.1";
-            LOGFILE = new StreamWriter("UI_Network_log.txt");
+            //LOGFILE = new StreamWriter("UI_Network_log.txt");
            // LOGFILE.AutoFlush = true;
 
             ui = new SocketConnection(UI_PORT, LOCAL_IP);
@@ -53,6 +53,7 @@ namespace WpfApp1
             UI_STREAM = ui.Connect();
             //else
             //Console.Write("");
+            networkCom.Start();
         }
 
         public void SendStart()
@@ -97,6 +98,22 @@ namespace WpfApp1
             }
         }
 
+        public void SendImage(string fn)
+        {
+            try
+            {
+                string message = "IMAGE " + fn;
+
+                if (NetworkConnected)
+                    UI_STREAM.Write(Encoding.ASCII.GetBytes(message), 0, Encoding.ASCII.GetByteCount(message));
+                // LOGFILE.WriteLine(">> Sent: \"IMAGE\" TO SERVER " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
+            }
+            catch (Exception e)
+            {
+                //  LOGFILE.WriteLine(e.InnerException);
+            }
+        }
+
         // Getter for UI to check the battery percentage.
         public float? GetVoltage()
         {
@@ -109,47 +126,50 @@ namespace WpfApp1
             return SafeToDrive;
         }
 
-        public void SendImage(string fn)
+        public bool isConnected()
         {
-            try
-            {
-                string message = "IMAGE " + fn;
+            return NetworkConnected;
+        }
 
-                if (NetworkConnected)
-                    UI_STREAM.Write(Encoding.ASCII.GetBytes(message), 0, Encoding.ASCII.GetByteCount(message));
-               // LOGFILE.WriteLine(">> Sent: \"IMAGE\" TO SERVER " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
-            }
-            catch (Exception e)
-            {
-              //  LOGFILE.WriteLine(e.InnerException);
-            }
+        public bool getUploadStatus()
+        {
+            return UploadStatus;
         }
 
         Thread networkCom = new Thread(delegate ()
-        {
+        { 
+
             while (true)
             {
                 NetworkConnected = false;
 
-              //  LOGFILE.WriteLine(">> LISTENING: port " + UI_PORT + " " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
+                //  LOGFILE.WriteLine(">> LISTENING: port " + UI_PORT + " " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
 
-                UI_STREAM = ui.Connect();
+                try {
+                    UI_STREAM = ui.Connect();
+                    
+                    NetworkConnected = true;
+                }catch(Exception ex)
+                {
+                    NetworkConnected = false;
+                }
 
              //   LOGFILE.WriteLine(">> CLIENT CONNECTED: UI " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
 
                 ImageCounter = 0;
 
-                while (UI_CLIENT.Connected)
+                while (NetworkConnected)
                 {
-                    NetworkConnected = true;
                     try
                     {
-                        byte[] buffer = new byte[UI_CLIENT.ReceiveBufferSize];
-                        int bytesRead = UI_STREAM.Read(buffer, 0, UI_CLIENT.ReceiveBufferSize);
+                        byte[] buffer = new byte[1024];
+                        int bytesRead = UI_STREAM.Read(buffer, 0, 1024);
                         string data = Encoding.ASCII.GetString(buffer, 0, bytesRead);
                    //     LOGFILE.WriteLine(">> Received: \"" + data + "\" FROM SERVER " + DateTime.Now.ToString("MM/dd/yyyy_HH:mm:ss.fff"));
 
                         string[] split = data.Split(' ');
+
+                        Console.WriteLine(data);
 
                         switch (split[0])
                         {

@@ -14,10 +14,16 @@ class FTPImageTransfer
 	//Establishes a connection to the server and uploads the specified file
     public void Upload(String filePath, String name)
     {
-        using (WebClient webClient = new WebClient())
+        try {
+            using (WebClient webClient = new WebClient())
+            {
+                webClient.Credentials = new NetworkCredential(Login, Password);
+                byte[] b = webClient.UploadFile(Address + "//" + name, "STOR", filePath);
+            }
+        }
+        catch(Exception e)
         {
-            webClient.Credentials = new NetworkCredential(Login, Password);
-            byte[] b = webClient.UploadFile(Address + "//" + name, "STOR", filePath);
+            
         }
     }
 
